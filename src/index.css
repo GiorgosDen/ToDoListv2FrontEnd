@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+    #root{
+        @apply h-screen w-screen flex flex-col overflow-hidden gap-0 bg-gray-100 p-4;
+        @apply md:grid md:grid-cols-[1fr_4fr];
+    }
+    nav{
+        @apply md:flex md:flex-col justify-start border border-gray-200 rounded-l-xl bg-slate-100;
+        @apply md:col-start-1;
+    }
+    main{
+        @apply flex flex-col justify-center align-middle border border-gray-200 rounded-r-xl bg-[#F9FAFB];
+        @apply md:col-start-2;
+    }
+    .navHeader{
+        @apply text-3xl text-blue-400;
+        @apply border-solid border-2 border-blue-600 gap-3; 
+    }
+    .navSection{
+        @apply text-2xl text-blue-400;
+        @apply border-solid border-2 border-blue-600 gap-3; 
+    }
+    .tasksScrollMenu{
+        @apply h-80 overflow-y-auto border rounded-lg p-2;
+    }
+    hr{
+        @apply my-2;
+    }
+}

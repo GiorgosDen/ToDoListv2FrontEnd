@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /* Using @layer components for reusable component styles */
+  .task-card {
+    @apply w-full flex items-center justify-between p-4 mb-3 rounded-xl bg-white border border-gray-200 shadow-sm hover:shadow-md hover:border-blue-300 transition-all cursor-pointer;
+  }
+
+  .task-checkbox {
+    @apply h-5 w-5 rounded border-gray-300 text-blue-600 focus:ring-blue-500 accent-blue-600 cursor-pointer;
+  }
+
+  .task-title {
+    @apply text-sm md:text-base font-medium text-gray-800 select-none;
+  }
+
+  /*If task expired or completed*/
+  .blocked-task-card {
+    @apply w-full flex items-center justify-between p-4 mb-3 rounded-xl bg-gray-100 border border-gray-200 opacity-60 cursor-not-allowed pointer-events-none;  
+  }
+
+
+}

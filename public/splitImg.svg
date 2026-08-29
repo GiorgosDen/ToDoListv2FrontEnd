@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="900" viewBox="0 0 1440 900">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F4F8FF"/>
+      <stop offset="1" stop-color="#EAF2FF"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#1677FF"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="18" stdDeviation="22" flood-color="#7896C8" flood-opacity=".18"/>
+    </filter>
+    <filter id="smallShadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#7896C8" flood-opacity=".16"/>
+    </filter>
+  </defs>
+
+  <rect width="1440" height="900" rx="28" fill="url(#bg)"/>
+
+  <!-- Brand -->
+  <g transform="translate(72 64)">
+    <rect width="48" height="48" rx="11" fill="url(#blue)"/>
+    <path d="M14 24l8 8 14-16" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="64" y="36" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700" fill="#13233B">ToDoList</text>
+  </g>
+
+  <!-- Copy -->
+  <g transform="translate(112 250)">
+    <text x="0" y="0" font-family="Inter, Arial, sans-serif" font-size="52" font-weight="700" fill="#14243C">Get organized,</text>
+    <text x="0" y="62" font-family="Inter, Arial, sans-serif" font-size="52" font-weight="700" fill="#14243C">achieve more</text>
+    <text x="0" y="116" font-family="Inter, Arial, sans-serif" font-size="21" fill="#5C6B82">Create an account to plan your tasks,</text>
+    <text x="0" y="150" font-family="Inter, Arial, sans-serif" font-size="21" fill="#5C6B82">set priorities, and stay on track</text>
+    <text x="0" y="184" font-family="Inter, Arial, sans-serif" font-size="21" fill="#5C6B82">every day.</text>
+  </g>
+
+  <!-- Decorative dots/cloud -->
+  <g fill="#BFD7FF" opacity=".75">
+    <circle cx="925" cy="232" r="4"/><circle cx="947" cy="232" r="4"/><circle cx="969" cy="232" r="4"/>
+    <circle cx="925" cy="254" r="4"/><circle cx="947" cy="254" r="4"/><circle cx="969" cy="254" r="4"/>
+    <circle cx="903" cy="276" r="4"/><circle cx="925" cy="276" r="4"/><circle cx="947" cy="276" r="4"/><circle cx="969" cy="276" r="4"/>
+  </g>
+  <g fill="#D8E7FF">
+    <circle cx="1170" cy="238" r="42"/>
+    <circle cx="1212" cy="250" r="55"/>
+    <circle cx="1260" cy="264" r="42"/>
+    <rect x="1168" y="264" width="105" height="30" rx="15"/>
+  </g>
+
+  <!-- Dashboard -->
+  <g filter="url(#shadow)" transform="translate(565 300)">
+    <rect width="680" height="430" rx="18" fill="#fff" stroke="#D7E1F0" stroke-width="2"/>
+    <rect width="680" height="54" rx="18" fill="#F7F9FC"/>
+    <rect y="38" width="680" height="16" fill="#F7F9FC"/>
+    <circle cx="30" cy="27" r="7" fill="#F3B85B"/>
+    <circle cx="53" cy="27" r="7" fill="#9EB0C8"/>
+    <circle cx="76" cy="27" r="7" fill="#8FB7E8"/>
+
+    <!-- Sidebar -->
+    <rect y="54" width="104" height="376" fill="#FBFCFE"/>
+    <rect x="16" y="76" width="72" height="56" rx="12" fill="#E8F0FF"/>
+    <path d="M40 104l10-9 10 9v14H40z" fill="none" stroke="#1769F5" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M48 119v-9h4v9" fill="none" stroke="#1769F5" stroke-width="3"/>
+    <g fill="none" stroke="#64748B" stroke-width="3" stroke-linecap="round">
+      <rect x="39" y="153" width="22" height="22" rx="3"/>
+      <path d="M39 164h22M45 148v10M55 148v10"/>
+      <rect x="39" y="193" width="22" height="22" rx="3"/>
+      <path d="M43 204l5 5 10-12"/>
+      <path d="M39 247h22l-11-11z"/>
+      <path d="M41 280h18v21H41zM41 286h18"/>
+    </g>
+
+    <!-- Add button -->
+    <circle cx="621" cy="60" r="38" fill="url(#blue)" filter="url(#smallShadow)"/>
+    <path d="M621 43v34M604 60h34" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- Task rows -->
+    <g font-family="Inter, Arial, sans-serif">
+      <g transform="translate(128 76)">
+        <rect width="520" height="68" rx="12" fill="#fff" stroke="#E5EBF4"/>
+        <rect x="22" y="19" width="27" height="27" rx="6" fill="#fff" stroke="#CBD6E5" stroke-width="3"/>
+        <rect x="70" y="19" width="150" height="8" rx="4" fill="#DCE4EF"/>
+        <rect x="70" y="37" width="90" height="8" rx="4" fill="#C9DCFA"/>
+      </g>
+      <g transform="translate(128 156)">
+        <rect width="520" height="68" rx="12" fill="#fff" stroke="#E5EBF4"/>
+        <rect x="22" y="19" width="27" height="27" rx="6" fill="url(#blue)"/>
+        <path d="M28 32l6 6 10-12" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="70" y="19" width="150" height="8" rx="4" fill="#DCE4EF"/>
+        <rect x="70" y="37" width="90" height="8" rx="4" fill="#C9DCFA"/>
+        <circle cx="492" cy="25" r="3" fill="#8492A6"/><circle cx="492" cy="34" r="3" fill="#8492A6"/><circle cx="492" cy="43" r="3" fill="#8492A6"/>
+      </g>
+      <g transform="translate(128 236)">
+        <rect width="520" height="68" rx="12" fill="#fff" stroke="#E5EBF4"/>
+        <rect x="22" y="19" width="27" height="27" rx="6" fill="#fff" stroke="#CBD6E5" stroke-width="3"/>
+        <rect x="70" y="19" width="150" height="8" rx="4" fill="#DCE4EF"/>
+        <rect x="70" y="37" width="90" height="8" rx="4" fill="#CDEEDB"/>
+        <circle cx="492" cy="32" r="13" fill="#22C55E"/>
+        <path d="M486 32l5 5 8-10" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+      </g>
+      <g transform="translate(128 316)">
+        <rect width="520" height="68" rx="12" fill="#fff" stroke="#E5EBF4"/>
+        <rect x="22" y="19" width="27" height="27" rx="6" fill="#fff" stroke="#CBD6E5" stroke-width="3"/>
+        <rect x="70" y="19" width="150" height="8" rx="4" fill="#DCE4EF"/>
+        <rect x="70" y="37" width="90" height="8" rx="4" fill="#D9C8FA"/>
+        <path d="M486 20h16v20l-8-5-8 5z" fill="none" stroke="#F59E0B" stroke-width="3" stroke-linejoin="round"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- Plant -->
+  <g transform="translate(545 710)">
+    <path d="M36 0c-7-38 8-70 24-88 13 28 9 59-24 88z" fill="#22B573"/>
+    <path d="M45 5c25-29 52-35 70-34-11 31-37 45-70 34z" fill="#2FC486"/>
+    <path d="M35 11C8-4-6-29-5-51c29 7 44 28 40 62z" fill="#35C98A"/>
+    <path d="M42 8v-63" stroke="#229E69" stroke-width="5" stroke-linecap="round"/>
+    <path d="M19 52h64l-8 52H27z" fill="#D7DFEA"/>
+    <ellipse cx="51" cy="52" rx="32" ry="9" fill="#C6D0DE"/>
+  </g>
+
+  <!-- Mug -->
+  <g transform="translate(1190 730)">
+    <path d="M0 0h82v61c0 20-14 31-41 31S0 81 0 61z" fill="#72A8F9"/>
+    <path d="M82 15c42-5 51 42 17 50" fill="none" stroke="#72A8F9" stroke-width="14" stroke-linecap="round"/>
+    <ellipse cx="41" cy="0" rx="41" ry="10" fill="#2D74E8"/>
+    <ellipse cx="41" cy="1" rx="33" ry="6" fill="#153E91"/>
+  </g>
+
+  <!-- Ground shadow -->
+  <ellipse cx="900" cy="835" rx="390" ry="28" fill="#BFD3F1" opacity=".25"/>
+</svg>

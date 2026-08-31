@@ -9,26 +9,31 @@ import CompletedTaskMenu from './components/CompletedTaskMenu';
 //Import css files
 import '../../App.css'
 import '../../index.css'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useOutletContext } from 'react-router-dom';
 
-function MainPage({changeNavVisibility}){
+function MainPage(){
 
+  //Get viewMode from outlet context
+  const {viewMode,handleChangeViewMode} = useOutletContext();
   //Get the username
   const location = useLocation();
   const name = location.state?.username;
   /**Hooks UseStates**/
-  //extract user tasks (from localstorage)
+  //user tasks that extract from database 
   const [userTasks, setUserTasks] = useState(null);
-
+  //Set tasks counter (change with view mode)
+  const [currentViewModeTasks,setCurrentViewModeTasks] = useState(0);
   //Set completed Tasks counter based on updated userTasks
   const [completedTasks, setCompletedTaks] = useState(0);
+
 
   useEffect(()=>{
     const getTasks =async()=>{
       try{
-        const resTasks = await taskService.getDailyTasks();
+        const resTasks = await taskService.getUserTasks(viewMode);
         //console.log(resTasks.userTasks.length);
         if(resTasks){
+          setCurrentViewModeTasks(resTasks.userTasks.length);
           setUserTasks(resTasks.userTasks);
         } 
       } catch (error) {
@@ -36,10 +41,7 @@ function MainPage({changeNavVisibility}){
       }
     }
     getTasks();
-  },[]);
-  useEffect(()=>{
-    console.log("Change Tasks number");
-  },[userTasks]);
+  },[viewMode]);
 
   //interval to check expired tasks
   useEffect(()=>{
@@ -71,12 +73,12 @@ function MainPage({changeNavVisibility}){
     <>
         <MainHeader userName={name}/>
         <hr/>
-        <AddTaskMenu totalTasks={0}/>
+        <AddTaskMenu totalTasks={currentViewModeTasks} viewMode={viewMode}/>
         <div className='tasksScrollMenu'>
           {
             userTasks && userTasks.length>0 ? (
               userTasks?.map((task,index)=>(
-                <CheckTask key={index} userTask={task} onCheckTaskChange={handleCheckTaskChange}/>
+                <CheckTask key={index} userTask={task} onCheckTaskChange={handleCheckTaskChange} dailyTasks={viewMode==="day"?true:false}/>
               )
             )
           ) : (
@@ -84,7 +86,7 @@ function MainPage({changeNavVisibility}){
           )
           }
         </div>
-        <CompletedTaskMenu tasksCount={0} completedTaskCount={completedTasks}/>
+        <CompletedTaskMenu tasksCount={currentViewModeTasks} completedTaskCount={completedTasks}/>
     </>
   );
 }

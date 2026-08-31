@@ -1,18 +1,14 @@
 import { useNavigate, Link } from "react-router-dom";
+import taskService from "../../../services/taskService";
 
 //Panel to Update (in future versions) and Delete task
 function TaskManagePanel({taskID}){
     const navigate = useNavigate();
-    const deleteTask = ()=>{
-        //get all tasks
-        const userTasks = localStorage.getItem('tasks')? JSON.parse(localStorage.getItem('tasks')):[];
-        console.log("----------------------");
-        console.log(taskID);
-        console.log(userTasks);
-        console.log(userTasks.filter((task)=>task.id!==taskID))
-        //filter and save the list 
-        localStorage.setItem("tasks",JSON.stringify(userTasks.filter((task)=>Number(task.id)!==Number(taskID))));
-        navigate("/home");
+    const deleteTask = async()=>{
+        const deleteStat = await taskService.deleteTaskByID(taskID);
+        if(deleteStat==200){
+            navigate("/home");
+        }
     }
 
     return(

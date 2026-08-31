@@ -2,7 +2,10 @@ import { useEffect, useState } from 'react';
 import './checktask.css'
 import { Link } from 'react-router-dom';
 
-function CheckTask({userTask, onCheckTaskChange}){
+//userTask: Task object data, 
+//onCheckTaskChange: function that pass 1/-1 to parent 
+//dailyTasks: Boolean value that declars if are showing daily tasks
+function CheckTask({userTask, onCheckTaskChange, dailyTasks}){
   const [taskStatusMessage, setTaskStatusMessage] = useState("");//Message if task is not In progress
   const [expComplCardClass, setExpComplCardClass] = useState("");// 
 
@@ -40,7 +43,8 @@ function CheckTask({userTask, onCheckTaskChange}){
       </div>
       <div className='flex justify-between gap-2'>
         <span className="text-xs md:text-md text-gray-400 whitespace-nowrap">
-          {userTask.DateTime.split("T")[1].split(".")[0]}
+          {/**If dailyTasks is true HH:mm else mm-dd HH:mm */}
+          {dailyTasks?userTask.DateTime.slice(11,16):`${userTask.DateTime.split("T")[0].slice(5,10)} ${userTask.DateTime.split("T")[1].slice(0,5)}`}
         </span>
         <Link to={`taskPage/${userTask.id}`} className="text-xs md:text-sm py-1 px-2 text-white bg-blue-400 hover:bg-blue-700 rounded-2xl">
           !

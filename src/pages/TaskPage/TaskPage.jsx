@@ -2,18 +2,34 @@ import { useParams } from 'react-router-dom';
 import TaskInfoHeader from './components/TaskInfoHeader';
 import TaskInfoPanel from './components/TaskInfoPanel';
 import TaskManagePanel from './components/TaskManagePanel';
+import { useEffect, useState } from 'react';
+
+import taskService from '../../services/taskService';
 
 function TaskPage(){
-    //Get task id from url
     const {taskId} = useParams();
-    //Receive Task
-    const userTasks = localStorage.getItem('tasks')? JSON.parse(localStorage.getItem('tasks')):[];
-    const taskTarget = userTasks.filter((task)=>task.id==taskId); //A list with 1 item
+    const [taskByID,setTaskByID] = useState({id:0,Name:"",Description:"",DateTime:"",Category:1,State:1,Priority:1,Reminder:0,Repeat:0,UserID:0,CatName:"Work",PrName:"Low"});
+    useEffect(()=>{
+        //Get task id from url
+        const getTaskByID = async()=>{
+            try {
+                //console.log(`TaskID:${taskId}`);
+                const aTask = await taskService.getUserTaskByID(Number(taskId));
+                const taskID = aTask?aTask.userTask[0]:0;
+                //console.log(taskID);
+                setTaskByID(taskID);   
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getTaskByID();
+    },[taskId]);
+
     return(
         <div className='p-4'>
             <TaskInfoHeader/>
-            <TaskInfoPanel aTask={taskTarget[0]}/>
-            <TaskManagePanel taskID={taskId}/>
+            <TaskInfoPanel aTask={taskByID}/>
+            <TaskManagePanel taskID={taskByID.id}/>
         </div>
     );
 }

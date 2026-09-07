@@ -24,13 +24,24 @@ const taskService = {
     async createNewTask(newTaskObj){
         try {
             const response = await apiClient.post('/tasks',newTaskObj);
-            //console.log(response.data);
+            console.log(response.data);
             return response.data;
         } catch (error) {
             console.log(error);
             throw error;
         }
     },
+    //Update a task as completed
+    async updateTaskStateByID(taskID){
+        try {
+            const response = await apiClient.put(`/tasks/${taskID}`);
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    },
+    //Update 1 or more task columns
     async updateTaskByID(taskID,taskData){
         try {
             const response = await apiClient.put(`/tasks${taskID}`,taskData);

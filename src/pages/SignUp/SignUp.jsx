@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+import authService from "../../services/authService";
+
 function SignUp(){
     //Navigate state
     const navigate = useNavigate();
@@ -19,7 +21,7 @@ function SignUp(){
     const [agreeTerms, setAgreeTerms] = useState(false);
 
     //Handle click function
-    const handleSignUp= ()=>{
+    const handleSignUp= async()=>{
         //Valid conditions counter
         let validConditions = 0;
         //hid the error messages
@@ -72,7 +74,15 @@ function SignUp(){
         //Complete Sign Up or continue
         //5 main conditons must be met
         if(validConditions===5){
-            navigate("/home");
+            const signUpData = {
+                fullName: userName,
+                email: userEmail,
+                password: userPassword
+            }
+            const result = await authService.signUpService(signUpData);
+            if(result.success){
+                navigate("/");
+            }
         }
 
     };
@@ -107,7 +117,7 @@ function SignUp(){
             {/*Agree Terms & Policy checkbox  */}
             <div id="agreedPanel"> 
                 <input type="checkbox" checked={agreeTerms} onChange={(ch)=>setAgreeTerms(ch.target.checked)}/>
-                <label className="text-gray-600 text-sm">I agree to the <span className="text-blue-400">Terms of Service</span> & <span className="text-blue-400">Privacy Policy</span></label>
+                <label className="text-gray-600 text-sm">I agree to the <Link to={'/terms'} className="text-blue-400 hover:underline hover:text-blue-700">Terms of Service</Link> & <Link to={'/policy'} className="text-blue-400 hover:underline hover:text-blue-700">Privacy Policy</Link></label>
                 <span className={`text-sm text-red-700 ${agreeTermsError}`}> *Must be agreed with Terms and Policy</span>
             </div>
             <button className="mt-2 py-2 bg-blue-700 text-white rounded-lg shadow-md hover:bg-blue-800"

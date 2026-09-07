@@ -51,13 +51,12 @@ function LoginPage(){
                     "importedEmail":userEmail,
                     "importedPassword":userPassword
                 } 
-                console.log("ready to get user token");
                 //Get server response.data 
                 const resData = await authService.logInService(importedData);
                 console.log(resData);
                 //if server finds user (sends their name)
-                if(resData.name){
-                    const firstName = resData.name.trim().split(" ")[0];
+                if(resData.success){
+                    const firstName = resData.data.name.trim().split(" ")[0];
                     //Navigate and pass the user name (the first name in case that user has firstand last name)
                     navigate("/home", {state:{username:firstName}});
                 }     

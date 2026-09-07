@@ -82,7 +82,7 @@ function AddTaskForm(){
             const newTask ={
                 "name":taskName,
                 "taksDescription": taskDescription,
-                "DateTime":`${todayDate}T${todayTime}`,
+                "DateTime":`${taskDate}T${taskTime}`,
                 "category":taskCategory,
                 "state":1,
                 "priority":1,

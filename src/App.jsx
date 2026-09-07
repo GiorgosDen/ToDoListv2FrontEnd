@@ -9,6 +9,8 @@ import SignUp from './pages/SignUp/SignUp'
 import MainPage from './pages/Home/MainPage'
 import CreateNewTask from './pages/AddTask/CreateNewTask'
 import TaskPage from './pages/TaskPage/TaskPage'
+import TermsOfService from './pages/TermsAndPolicy/TermsOfService'
+import PrivacyPolicy from './pages/TermsAndPolicy/PrivacyPolicy'
 import './App.css'
 import './index.css'
 
@@ -16,6 +18,8 @@ function App() {
   return(
     <BrowserRouter basename="/">
       <Routes>
+          <Route path='/terms' element={<TermsOfService/>}/>
+          <Route path='/policy' element={<PrivacyPolicy/>}/>
           <Route path="/" element={<LogSignLayout/>}>
             <Route index element={<LoginPage/>}/>
             <Route path='/signUp' element={<SignUp/>}/>

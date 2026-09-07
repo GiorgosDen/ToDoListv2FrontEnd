@@ -35,6 +35,7 @@ function MainPage(){
         if(resTasks){
           setCurrentViewModeTasks(resTasks.userTasks.length);
           setUserTasks(resTasks.userTasks);
+          console.log(resTasks.userTasks);
         } 
       } catch (error) {
         console.log(error);

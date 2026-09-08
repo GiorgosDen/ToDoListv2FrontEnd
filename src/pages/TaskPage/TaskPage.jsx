@@ -8,7 +8,7 @@ import taskService from '../../services/taskService';
 
 function TaskPage(){
     const {taskId} = useParams();
-    const [taskByID,setTaskByID] = useState({id:0,Name:"",Description:"",DateTime:"",Category:1,State:1,Priority:1,Reminder:0,Repeat:0,UserID:0,CatName:"Work",PrName:"Low"});
+    const [taskByID,setTaskByID] = useState({id:0,Name:"",Description:"",DateTime:"0000/00/00, 00:00:00",Category:1,State:1,Priority:1,Reminder:0,Repeat:0,UserID:0,CatName:"Work",PrName:"Low"});
     useEffect(()=>{
         //Get task id from url
         const getTaskByID = async()=>{

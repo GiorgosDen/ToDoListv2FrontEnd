@@ -4,7 +4,8 @@ const taskService = {
     async getUserTasks(viewMode){
         try {
             const response =  await apiClient.get(`/tasks/${viewMode}`);
-            //console.log(response.data);
+            console.log("The Task I get");
+            console.log(response.data);
             return response.data;
         } catch (error) {
             console.log(error);
@@ -34,17 +35,17 @@ const taskService = {
     //Update a task as completed
     async updateTaskStateByID(taskID){
         try {
-            const response = await apiClient.put(`/tasks/${taskID}`);
-            return response.data;
+            const response = await apiClient.patch(`/tasks/${taskID}`);
+            return ({success:true,data:response.data});
         } catch (error) {
             console.log(error);
-            throw error;
+            return ({success:false,data:error});
         }
     },
     //Update 1 or more task columns
     async updateTaskByID(taskID,taskData){
         try {
-            const response = await apiClient.put(`/tasks${taskID}`,taskData);
+            const response = await apiClient.put(`/tasks/${taskID}`,taskData);
             return response.status;
         } catch (error) {
             console.log(error);

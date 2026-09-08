@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import {io} from 'socket.io-client';
 //Imported services
 import taskService from '../../services/taskService';
 //Import Page Components
@@ -10,6 +11,10 @@ import CompletedTaskMenu from './components/CompletedTaskMenu';
 import '../../App.css'
 import '../../index.css'
 import { useLocation, useOutletContext } from 'react-router-dom';
+
+//socket connection
+const serverURL = import.meta.env.SERVER_URL;
+const socket = io(serverURL);
 
 function MainPage(){
 
@@ -25,61 +30,83 @@ function MainPage(){
   const [currentViewModeTasks,setCurrentViewModeTasks] = useState(0);
   //Set completed Tasks counter based on updated userTasks
   const [completedTasks, setCompletedTaks] = useState(0);
+  //Greeting
+  const [greetingMessage,setGreetingMessage] = useState('Hello');
+
 
 
   useEffect(()=>{
     const getTasks =async()=>{
+      //Get initial tasks (or whenever the parameters change)
       try{
         const resTasks = await taskService.getUserTasks(viewMode);
-        //console.log(resTasks.userTasks.length);
         if(resTasks){
           setCurrentViewModeTasks(resTasks.userTasks.length);
           setUserTasks(resTasks.userTasks);
-          console.log(resTasks.userTasks);
         } 
       } catch (error) {
         console.log(error);
       }
     }
     getTasks();
-  },[viewMode]);
+    
+    //Create hello message
+    createHelloMessage();
 
-  //interval to check expired tasks
-  useEffect(()=>{
-    const interval = setInterval(()=>{
-      console.log(userTasks);
-    },60000);//checks every minute
-    return () => clearInterval(interval);
-  },[]);
+    //Listen to server for expired tasks update
+    socket.on('tasks-updated',()=>{
+      console.log("Server trigger receive: Refreshing task list...");
+      getTasks();
+    });
+    //Clean up
+    return ()=>{
+      socket.off('tasks-updated');
+    }
+
+  },[viewMode,completedTasks]);
 
   //Handle checked Tasks
-  const handleCheckTaskChange= (taskID,statusNumber)=>{
-      //Update counter
-      setCompletedTaks(completedTasks+statusNumber);
-      //Update task state
-      setUserTasks((curTasks)=>{
-        const updTasks = curTasks.map((task)=>{
-          //If the task clicked
-          if(task.id===taskID){
-            return({...task, state:statusNumber==1?"Completed":"In progress"});
-          }
-          return task;
-        });
-        //Update the state
-        return updTasks;
-      });     
+  const handleCheckTaskChange= async(taskID,statusNumber)=>{
+    try {
+      //Set task completed
+      const result = await taskService.updateTaskStateByID(taskID);
+      if(result.success){
+        //Update counter
+        setCompletedTaks(completedTasks+statusNumber);
+      }else{
+        console.log(result.data);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  //Create hello message
+  const createHelloMessage = ()=>{
+    const currentHour = new Date().getHours();
+    let greeting = "Hello";
+
+    if (currentHour >= 5 && currentHour < 12) {
+      greeting = "Good Morning";
+    } else if (currentHour >= 12 && currentHour < 17) {
+      greeting = "Good Afternoon";
+    } else if (currentHour >= 17 && currentHour < 22) {
+      greeting = "Good Evening";
+    } else {
+      greeting = "Good Night";
+    }
+    setGreetingMessage(greeting);
   }
 
   return (
     <>
-        <MainHeader userName={name}/>
+        <MainHeader helloMessage={greetingMessage} userName={name}/>
         <hr/>
         <AddTaskMenu totalTasks={currentViewModeTasks} viewMode={viewMode}/>
         <div className='tasksScrollMenu'>
           {
             userTasks && userTasks.length>0 ? (
               userTasks?.map((task,index)=>(
-                <CheckTask key={index} userTask={task} onCheckTaskChange={handleCheckTaskChange} dailyTasks={viewMode==="day"?true:false}/>
+                <CheckTask key={index} userTask={task} onCheckTaskChange={handleCheckTaskChange} dailyTasks={viewMode==="day"?true:false} completedTasks={viewMode=="completed"?true:false}/>
               )
             )
           ) : (
@@ -87,7 +114,7 @@ function MainPage(){
           )
           }
         </div>
-        <CompletedTaskMenu tasksCount={currentViewModeTasks} completedTaskCount={completedTasks}/>
+        <CompletedTaskMenu handleChangeViewMode={handleChangeViewMode} tasksCount={currentViewModeTasks} completedTaskCount={completedTasks}/>
     </>
   );
 }

@@ -8,8 +8,7 @@ import taskService from "../../../services/taskService";
     state:in Progress/Completed/Expired,
     name:"",
     description:"",
-    date:(today's date),
-    time:"hh:mm",
+    datetime: timestamp from selected datetime (yyyy-mm-dd hh:mm:ss),
     reminder: 0,
     category: "Work"/"..."/"Other" 
 
@@ -79,10 +78,13 @@ function AddTaskForm(){
         //Accept or Reject new Task creation
         if(conditions===3){
             //Create new Task JSON object
+            const ISODate = `${taskDate}T${taskTime}`;
+            const timestampMS = new Date(ISODate).getTime();
+            const timestampSC = Math.floor(timestampMS / 1000); 
             const newTask ={
                 "name":taskName,
-                "taksDescription": taskDescription,
-                "DateTime":`${taskDate}T${taskTime}`,
+                "taskDescription": taskDescription,
+                "DateTime":timestampSC,
                 "category":taskCategory,
                 "state":1,
                 "priority":1,

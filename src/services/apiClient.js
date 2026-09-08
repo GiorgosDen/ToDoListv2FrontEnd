@@ -3,7 +3,6 @@ import axios from "axios";
 
 //Used to in interceptors response
 const datetimeFormatter = new Intl.DateTimeFormat('en-GB',{
-    timeZone:'UTC',
     year:'numeric',
     month:'2-digit',
     day:'2-digit',
@@ -23,11 +22,15 @@ const apiClient =  axios.create({
 
 //exact UTC time from the string without converting it to your local timezone
 apiClient.interceptors.response.use((response)=>{
-    if(response.data && response.data.userTasks){
-        const tasks = response.data.userTasks;
+    const resTasks = response.data.userTasks || response.data.userTask;
+    if(response.data && resTasks ){
+        const tasks = resTasks;
         //console.log(tasks);
         const taskWithCorrectTimeZone = tasks.map((aTask)=>{
-            aTask.DateTime = datetimeFormatter.format(new Date(aTask.DateTime));
+            if(aTask.DateTime){
+                const aDate = new Date(aTask.DateTime * 1000);
+                aTask.DateTime = datetimeFormatter.format(aDate);
+            }
             return aTask;
         })
         response.data.userTasks = taskWithCorrectTimeZone;

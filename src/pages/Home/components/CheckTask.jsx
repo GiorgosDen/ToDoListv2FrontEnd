@@ -5,27 +5,36 @@ import { Link } from 'react-router-dom';
 //userTask: Task object data, 
 //onCheckTaskChange: function that pass 1/-1 to parent 
 //dailyTasks: Boolean value that declars if are showing daily tasks
-function CheckTask({userTask, onCheckTaskChange, dailyTasks}){
+//completedTasks: Boolean value that declars if are showing All completed tasks
+function CheckTask({userTask, onCheckTaskChange, dailyTasks, completedTasks}){
   const [taskStatusMessage, setTaskStatusMessage] = useState("");//Message if task is not In progress
   const [expComplCardClass, setExpComplCardClass] = useState("");// 
+  const [checkedBox, setCheckedBox] = useState(false);
 
   
   useEffect(()=>{
-    if(userTask.state=="In Progress"){
+    if(!completedTasks){
+      if(userTask.State==1){
+        setTaskStatusMessage("");
+        setExpComplCardClass("");
+      }else if(userTask.State==2){
+        setTaskStatusMessage("!Expired");
+        setExpComplCardClass("blocked-");
+      }else if(userTask.State==3){
+        setCheckedBox(true);
+        setTaskStatusMessage("!Completed");
+        setExpComplCardClass("blocked-");
+      }
+    }else{
+      setCheckedBox(true);
       setTaskStatusMessage("");
       setExpComplCardClass("");
-    }else if(userTask.state=="Expired"){
-      setTaskStatusMessage("!Expired");
-      setExpComplCardClass("blocked-");
-    }else if(userTask.state=="Completed"){
-      setTaskStatusMessage("!Completed");
-      setExpComplCardClass("blocked-");
     }
-  },[userTask.state]);
+  },[userTask]);
 
   const handleChange = (e) =>{
     //Call parents function and pass 1 if is checked (true) or -1 if is diselected
-      onCheckTaskChange(userTask.id,e.target.checked?1:-1);
+    onCheckTaskChange(userTask.id,e.target.checked?1:-1);
   }
 
   return(
@@ -33,6 +42,7 @@ function CheckTask({userTask, onCheckTaskChange, dailyTasks}){
       <div className="flex items-center gap-3">
         <input 
           type="checkbox" 
+          checked={checkedBox}
           className="task-checkbox" 
           onChange={handleChange}
         />

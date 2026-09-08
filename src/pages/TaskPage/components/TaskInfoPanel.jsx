@@ -1,8 +1,8 @@
 
 //Parameter aTask: task JSON object 
 function TaskInfoPanel({aTask}){
-    const yyyyMMDD = aTask.DateTime.split("T")[0];
-    const hhMM = aTask.DateTime.slice(11,16);
+    const yyyyMMDD = aTask.DateTime.slice(0,10);
+    const hhMM = aTask.DateTime.slice(12,17);
     return(
         <div className="flex flex-col  justify-start gap-2">
             <label className="font-semibold text-lg md:text-xl">Task Information</label>

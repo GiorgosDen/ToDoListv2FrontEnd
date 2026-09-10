@@ -3,7 +3,8 @@
 
 import { Outlet } from "react-router-dom";
 
-function LogSignLayout(){
+function LogSignLayout({triggerServerSideError}){
+
     return(
         <>
            <div className="w-full h-full border-2 rounded-lg shadow-sm flex flex-col md:flex-row md:col-start-1 md:col-end-3">
@@ -28,7 +29,7 @@ function LogSignLayout(){
                 </div>
                 {/*Form split-screen (outlet) */}
                 <div id="loginFormArea" className="overflow-y-auto z-10 w-full h-full bg-[rgba(235, 240, 250)] md:bg-[rgb(255,255,255)] rounded-lg md:rounded-r-lg flex flex-col  px-14 py-3 gap-4">
-                    <Outlet/>
+                    <Outlet context={{triggerServerSideError}}/>
                     {/*Image that shows at bottom area when a phone device is used*/}
                     <div className="w-full h-full py-5 md:hidden">
                         <img src="./splitImg.svg" className="w-full h-auto object-contain"/>

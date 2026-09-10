@@ -29,7 +29,7 @@ function TaskPage(){
         <div className='p-4'>
             <TaskInfoHeader/>
             <TaskInfoPanel aTask={taskByID}/>
-            <TaskManagePanel taskID={taskByID.id}/>
+            <TaskManagePanel taskID={taskByID.id} taskState={taskByID.State}/>
         </div>
     );
 }

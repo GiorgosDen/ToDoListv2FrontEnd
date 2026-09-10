@@ -29,7 +29,7 @@ function MainPage(){
   //Set tasks counter (change with view mode)
   const [currentViewModeTasks,setCurrentViewModeTasks] = useState(0);
   //Set completed Tasks counter based on updated userTasks
-  const [completedTasks, setCompletedTaks] = useState(0);
+  const [completedTasks, setCompletedTasks] = useState(0);
   //Greeting
   const [greetingMessage,setGreetingMessage] = useState('Hello');
 
@@ -72,7 +72,7 @@ function MainPage(){
       const result = await taskService.updateTaskStateByID(taskID);
       if(result.success){
         //Update counter
-        setCompletedTaks(completedTasks+statusNumber);
+        setCompletedTasks(completedTasks+statusNumber);
       }else{
         console.log(result.data);
       }

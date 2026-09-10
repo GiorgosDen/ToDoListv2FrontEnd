@@ -5,7 +5,7 @@ function NavHeader({handleChangeNavVisibility,iconPath}){
         handleChangeNavVisibility(false);
     }
     return(
-        <div className="group w-full h-10 inline-flex items-center justify-start text-gray-600 py-[15%]">
+        <div className="group w-full h-10 inline-flex items-center justify-start text-gray-600 py-[15%] cursor-pointer">
             <svg className="w-6 h-6 mr-2 shrink-0 fill-current" 
             viewBox="0 0 24 24" onClick={hideNavMenu}>
                 <path d={iconPath} />

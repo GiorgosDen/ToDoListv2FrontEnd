@@ -1,5 +1,8 @@
 //Sets API's url 
 import axios from "axios";
+import PopUpErrorsList from "./PopUpErrorsList";
+
+let globalServerErrorHandler = null;
 
 //Used to in interceptors response
 const datetimeFormatter = new Intl.DateTimeFormat('en-GB',{
@@ -20,6 +23,10 @@ const apiClient =  axios.create({
     withCredentials: true
 });
 
+export const setGlobalServerErrorHandler = (errorHandler)=>{
+    globalServerErrorHandler = errorHandler;
+}
+
 //exact UTC time from the string without converting it to your local timezone
 apiClient.interceptors.response.use((response)=>{
     const resTasks = response.data.userTasks || response.data.userTask;
@@ -36,6 +43,13 @@ apiClient.interceptors.response.use((response)=>{
         response.data.userTasks = taskWithCorrectTimeZone;
     }
     return response;
+},(error)=>{
+    const status = error.response ? error.response.status : 'default';
+    const matchedError = PopUpErrorsList.find(err => err.status === status) || PopUpErrorsList.find(err => err.status === 'default');
+    if(globalServerErrorHandler && matchedError){
+        globalServerErrorHandler(matchedError);
+    }
+    return Promise.reject(error);
 });
 
 export default apiClient;

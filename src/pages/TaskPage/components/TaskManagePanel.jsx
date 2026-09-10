@@ -1,13 +1,23 @@
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useOutletContext } from "react-router-dom";
 import taskService from "../../../services/taskService";
+import PopUpErrorsList from "../../../services/PopUpErrorsList";
 
 //Panel to Update (in future versions) and Delete task
-function TaskManagePanel({taskID}){
+function TaskManagePanel({taskID,taskState}){
+    //outlet context
+    const {triggerServerSideError} = useOutletContext();
     const navigate = useNavigate();
     const deleteTask = async()=>{
-        const deleteStat = await taskService.deleteTaskByID(taskID);
-        if(deleteStat==200){
-            navigate("/home");
+        //If the task is not completed
+        if(taskState!==3){
+            const deleteStat = await taskService.deleteTaskByID(taskID);
+            if(deleteStat==200){
+                navigate("/home");
+            }
+        }else{
+            //Completed tasks cannot be deleted
+            const matchedError = PopUpErrorsList.find(err => err.status === 'delete-completed');
+            triggerServerSideError(matchedError);
         }
     }
 

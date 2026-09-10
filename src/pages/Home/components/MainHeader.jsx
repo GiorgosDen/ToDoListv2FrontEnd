@@ -1,8 +1,18 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-function MainHeader({helloMessage,userName}){
+function MainHeader({helloMessage,userName,sendTaskSorter,currentViewMode}){
     const [showDropDown, setShowDropDown] = useState(false);
     const [sortBy, setSortBy] = useState('Time');
+
+    useEffect(()=>{
+        setSortBy("Time");
+    },[currentViewMode]);
+    const changeSorter = (sorter)=>{
+        setShowDropDown(false); 
+        setSortBy(sorter);
+        sendTaskSorter(sorter);
+    }
+
     return( 
         <div className="flex flex-row justify-between items-end px-[2%] pb-[5%] pt-[3%]">
             <section>
@@ -20,8 +30,8 @@ function MainHeader({helloMessage,userName}){
                 </button>
                 <div className={`${showDropDown?'block':'hidden'} absolute z-10 bg-white border border-default-medium rounded-base shadow-lg w-44`}>
                     <ul className="p-2 text-sm text-body font-medium" aria-labelledby="dropdownDefaultButton">
-                        <li onClick={()=>{setShowDropDown(false); setSortBy('Time');}} className="py-1 px-2 rounded-md text-sm md:text-md text-gray-600 hover:text-white hover:bg-blue-600 cursor-pointer">Time</li>
-                        <li onClick={()=>{setShowDropDown(false); setSortBy('State');}} className="py-1 px-2 rounded-md text-sm md:text-md text-gray-600 hover:text-white hover:bg-blue-600 cursor-pointer">State</li>
+                        <li onClick={()=>{changeSorter('Time')}} className="py-1 px-2 rounded-md text-sm md:text-md text-gray-600 hover:text-white hover:bg-blue-600 cursor-pointer">Time</li>
+                        <li onClick={()=>{changeSorter('State')}} className="py-1 px-2 rounded-md text-sm md:text-md text-gray-600 hover:text-white hover:bg-blue-600 cursor-pointer">State</li>
                     </ul>
                 </div>
                 </div>

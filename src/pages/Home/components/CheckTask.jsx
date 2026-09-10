@@ -54,7 +54,7 @@ function CheckTask({userTask, onCheckTaskChange, dailyTasks, completedTasks}){
       </div>
       <div className='flex justify-between gap-2'>
         <span className="text-xs md:text-md text-gray-400 whitespace-nowrap">
-          {/**If dailyTasks is true HH:mm else mm-dd HH:mm */ console.log(userTask.DateTime)}
+          {/**If dailyTasks is true HH:mm else mm-dd HH:mm */}
           {dailyTasks?userTask.DateTime.slice(12,17):`${userTask.DateTime.split(",")[0].slice(0,5)} ${userTask.DateTime.split(",")[1].slice(1,6)}`}
         </span>
         <Link to={`taskPage/${userTask.id}`} className="text-xs md:text-sm py-1 px-2 text-white bg-blue-400 hover:bg-blue-700 rounded-2xl">

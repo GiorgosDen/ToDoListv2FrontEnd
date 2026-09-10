@@ -25,15 +25,13 @@ function MainPage(){
   const name = location.state?.username;
   /**Hooks UseStates**/
   //user tasks that extract from database 
-  const [userTasks, setUserTasks] = useState(null);
+  const [userTasks, setUserTasks] = useState([]);
   //Set tasks counter (change with view mode)
   const [currentViewModeTasks,setCurrentViewModeTasks] = useState(0);
   //Set completed Tasks counter based on updated userTasks
   const [completedTasks, setCompletedTasks] = useState(0);
   //Greeting
   const [greetingMessage,setGreetingMessage] = useState('Hello');
-
-
 
   useEffect(()=>{
     const getTasks =async()=>{
@@ -49,7 +47,8 @@ function MainPage(){
       }
     }
     getTasks();
-    
+
+    handleSortTasksChange('Time');
     //Create hello message
     createHelloMessage();
 
@@ -63,8 +62,16 @@ function MainPage(){
       socket.off('tasks-updated');
     }
 
-  },[viewMode,completedTasks]);
+  },[viewMode]);
 
+  //Handle sort Tasks change
+  const handleSortTasksChange = (sorter)=>{
+    if(sorter==="Time"){
+      setUserTasks([...userTasks].sort((a,b)=>{return (new Date(b.DateTime)-new Date(a.DateTime))}));  
+    }else{
+      setUserTasks([...userTasks].sort((a,b)=>{return (b.State-a.State)}));
+    }
+  }
   //Handle checked Tasks
   const handleCheckTaskChange= async(taskID,statusNumber)=>{
     try {
@@ -99,7 +106,7 @@ function MainPage(){
 
   return (
     <>
-        <MainHeader helloMessage={greetingMessage} userName={name}/>
+        <MainHeader helloMessage={greetingMessage} userName={name} sendTaskSorter={handleSortTasksChange} currentViewMode={viewMode}/>
         <hr/>
         <AddTaskMenu totalTasks={currentViewModeTasks} viewMode={viewMode}/>
         <div className='tasksScrollMenu'>

@@ -53,7 +53,6 @@ function LoginPage(){
                 } 
                 //Get server response.data 
                 const resData = await authService.logInService(importedData);
-                console.log(resData);
                 //if server finds user (sends their name)
                 if(resData.success){
                     const firstName = resData.data.name.trim().split(" ")[0];

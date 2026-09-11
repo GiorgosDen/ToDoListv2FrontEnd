@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import {BrowserRouter, Routes, Route, Link } from 'react-router-dom'
+import {BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom'
 //import Layouts
 import LogSignLayout from './LogSignLayout'
 import Layout from './Layout'
@@ -15,11 +15,13 @@ import './App.css'
 import './index.css'
 import ErrorMessagePopUp from './components/ErrorMessagePopUp'
 import { setGlobalServerErrorHandler } from './services/apiClient'
+import UserPage from './pages/UserPage/UserPage'
 
 function App() {
   //ErrorMessagePopUp States
   const [popUpVisible, setPopUpVisible] = useState(false);
   const [popUpData, setPopUpData] = useState({
+    status:0,
     title:"A server-side error",
     description:"A server issue during API calls",
     iconPath:"",
@@ -27,14 +29,23 @@ function App() {
     buttonMessage:"Close"
   });
 
-  const triggerServerSideError = (data)=>{
-    console.log(`Change PopUp visibility:${popUpVisible}`)
+  const triggerPopUpMessage = (data)=>{
+    console.log(`Change PopUp visibility:${popUpVisible}`);
+    //console.log(data);
     setPopUpData(data);
     setPopUpVisible(true);
   }
 
+  const closePopUpMessage= (status)=>{
+    console.log(`Change PopUp visibility:false`);
+    console.log(status);
+    setPopUpVisible(false);
+    if(status===403) window.location.href = "/";;
+  }
+
   useEffect(()=>{
-    setGlobalServerErrorHandler(triggerServerSideError);
+    console.log("Handler registered");
+    setGlobalServerErrorHandler(triggerPopUpMessage);
   },[]);
 
   return(
@@ -42,14 +53,15 @@ function App() {
       <Routes>
           <Route path='/terms' element={<TermsOfService/>}/>
           <Route path='/policy' element={<PrivacyPolicy/>}/>
-          <Route path="/" element={<LogSignLayout triggerServerSideError={triggerServerSideError}/>}>
+          <Route path="/" element={<LogSignLayout triggerPopUpMessage={triggerPopUpMessage}/>}>
             <Route index element={<LoginPage/>}/>
             <Route path='/signUp' element={<SignUp/>}/>
           </Route>
-          <Route path="/home" element={<Layout triggerServerSideError={triggerServerSideError}/>}>
+          <Route path="/home" element={<Layout triggerPopUpMessage={triggerPopUpMessage}/>}>
             <Route index element={<MainPage/>}/>
             <Route path="addNewTask" element={<CreateNewTask/>}/>
             <Route path="taskPage/:taskId" element={<TaskPage/>}/>
+            <Route path="userSettings" element={<UserPage/>}/>
           </Route>
         </Routes>
         <ErrorMessagePopUp
@@ -59,7 +71,7 @@ function App() {
           iconColor={popUpData.iconColor}
           buttonMessage={popUpData.buttonMessage}
           seePopUp={popUpVisible}
-          onClose={()=>setPopUpVisible(false)}/>
+          onClose={()=>closePopUpMessage(popUpData.status)}/>
       </BrowserRouter>
   );
 }

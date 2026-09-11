@@ -4,8 +4,8 @@ const taskService = {
     async getUserTasks(viewMode){
         try {
             const response =  await apiClient.get(`/tasks/${viewMode}`);
-            console.log("The Task I get");
-            console.log(response.data);
+            ///console.log("The Task I get");
+            //console.log(response.data);
             return response.data;
         } catch (error) {
             console.log(error);

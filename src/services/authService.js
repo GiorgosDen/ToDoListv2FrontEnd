@@ -21,6 +21,15 @@ const authService = {
             console.log(error);
             return {success:false,data:error};
         }
+    },
+    async logOutService(){
+        try {
+            const response = await apiClient.post('/auth/logout');
+            return {success:true,data:response.data};
+        } catch (error) {
+            console.log(error);
+            return {success:false,data:error};
+        }
     }
 } 
 

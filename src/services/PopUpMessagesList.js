@@ -1,6 +1,14 @@
 //A list with ErrorMessagePopUp component objects
 
-const PopUpErrorsList =[
+const PopUpMessagesList =[
+    {
+        status:201,
+        title:"Success",
+        description:"",
+        iconPath:"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z",
+        iconColor:"text-green-500",
+        buttonMessage:"Continue"
+    },
     {
         status:403,
         title:"Session Expired",
@@ -56,7 +64,15 @@ const PopUpErrorsList =[
         iconPath:"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8 0-1.42.38-2.73 1.04-3.87l10.83 10.83C14.73 19.62 13.42 20 12 20zm7.96-4.13L9.13 5.04C10.27 4.38 11.58 4 13 4c4.41 0 8 3.59 8 8 0 1.42-.38 2.73-1.04 3.87z",
         iconColor:"text-yellow-500",
         buttonMessage:"Close"
+    },
+    {
+        status:'empty-update-user',
+        title:"Empty Fields",
+        description:"You're trying to update your data without filling out the form. You must fill out at least one field.",
+        iconPath:"M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z",
+        iconColor:"text-amber-500",
+        buttonMessage:"Close"
     }
 ]
 
-export default PopUpErrorsList;
+export default PopUpMessagesList;

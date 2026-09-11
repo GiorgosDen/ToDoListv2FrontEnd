@@ -1,6 +1,6 @@
 //Sets API's url 
 import axios from "axios";
-import PopUpErrorsList from "./PopUpErrorsList";
+import PopUpMessagesList from "./PopUpMessagesList";
 
 let globalServerErrorHandler = null;
 
@@ -44,8 +44,12 @@ apiClient.interceptors.response.use((response)=>{
     }
     return response;
 },(error)=>{
+    //console.log("---------------------");
+    //console.log(error.response.status);
     const status = error.response ? error.response.status : 'default';
-    const matchedError = PopUpErrorsList.find(err => err.status === status) || PopUpErrorsList.find(err => err.status === 'default');
+    const matchedError = PopUpMessagesList.find(err => err.status === status) || PopUpMessagesList.find(err => err.status === 'default');
+    //console.log(globalServerErrorHandler);
+    //console.log(matchedError);
     if(globalServerErrorHandler && matchedError){
         globalServerErrorHandler(matchedError);
     }

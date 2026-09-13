@@ -10,7 +10,7 @@ function NavHeader({handleChangeNavVisibility,iconPath}){
             viewBox="0 0 24 24" onClick={hideNavMenu}>
                 <path d={iconPath} />
             </svg>
-            <span className="text-black font-bold text-xl sm:text-base">ToDoList v1</span>
+            <span className="text-black font-bold sm:text-base md:text-xl lg:text-2xl xl:text-3xl">ToDoList v2.0</span>
         </div>
     );
 }

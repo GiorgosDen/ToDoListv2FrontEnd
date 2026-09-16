@@ -9,6 +9,15 @@ const taskCatService ={
             console.log(error);
             throw error;
         }
+    },
+    async createTaskCategory(categoryData){
+        try {
+            const response = await apiClient.post('/taskCategories');
+            return response.data;
+        } catch (error) {
+                console.log(error);
+                throw error;
+        }
     }
 };
 

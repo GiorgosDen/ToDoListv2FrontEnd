@@ -17,6 +17,7 @@ import ErrorMessagePopUp from './components/ErrorMessagePopUp'
 import { setGlobalServerErrorHandler } from './services/apiClient'
 import UserPage from './pages/UserPage/UserPage'
 import StatisticsPage from './pages/StatisticsPage/StatisticsPage'
+import TaskCategoryPage from './pages/TaskCategory/TaskCategoryPage'
 
 function App() {
   //ErrorMessagePopUp States
@@ -64,6 +65,7 @@ function App() {
             <Route path="taskPage/:taskId" element={<TaskPage/>}/>
             <Route path="userSettings" element={<UserPage/>}/>
             <Route path="statistics" element={<StatisticsPage/>}/>
+            <Route path="taskCategory" element={<TaskCategoryPage/>}/>
           </Route>
         </Routes>
         <ErrorMessagePopUp

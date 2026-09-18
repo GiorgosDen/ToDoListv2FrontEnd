@@ -11,18 +11,19 @@
     nav{
         @apply md:flex md:flex-col justify-start border border-gray-200 rounded-l-xl bg-slate-100;
         @apply md:col-start-1;
-        @apply overflow-y-auto min-h-0;
+        @apply md:overflow-y-auto min-h-0;
         @apply pl-2;
     }
     main{
-        @apply flex flex-col justify-center align-middle border border-gray-200 rounded-r-xl bg-[#F9FAFB];
+        @apply flex flex-col justify-start align-middle border border-gray-200 rounded-r-xl bg-[#F9FAFB];
         @apply md:col-start-2;
         @apply overflow-y-auto min-h-0;
-        @apply py-5 pl-2;
+        @apply py-5 md:py-0 pl-2;
     }
     .navHeader{
         @apply text-3xl text-blue-400;
         @apply border-solid border-2 border-blue-600 gap-3; 
+        @apply h-full;
     }
     .navSection{
         @apply text-2xl text-blue-400;

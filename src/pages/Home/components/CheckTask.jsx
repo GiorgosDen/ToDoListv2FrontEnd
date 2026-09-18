@@ -10,9 +10,8 @@ function CheckTask({userTask, onCheckTaskChange, dailyTasks, completedTasks}){
   const [taskStatusMessage, setTaskStatusMessage] = useState("");//Message if task is not In progress
   const [expComplCardClass, setExpComplCardClass] = useState("");// 
   const [checkedBox, setCheckedBox] = useState(false);
-
   
-  useEffect(()=>{
+  const setTaskAppearence = ()=>{
     if(!completedTasks){
       if(userTask.State==1){
         setTaskStatusMessage("");
@@ -30,9 +29,14 @@ function CheckTask({userTask, onCheckTaskChange, dailyTasks, completedTasks}){
       setTaskStatusMessage("");
       setExpComplCardClass("");
     }
-  },[userTask]);
+  }
+  useEffect(()=>{
+    setTaskAppearence();
+  },[userTask.State, checkedBox]);
 
   const handleChange = (e) =>{
+    const isChecked = e.target.checked;
+    setCheckedBox(isChecked);
     //Call parents function and pass 1 if is checked (true) or -1 if is diselected
     onCheckTaskChange(userTask.id,e.target.checked?1:-1);
   }

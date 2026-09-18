@@ -84,6 +84,17 @@ function MainPage(){
       if(result.success){
         //Update counter
         setCompletedTasks(completedTasks+statusNumber);
+        setUserTasks((prevTasks) =>
+          prevTasks.map((task) => {
+            if (task.id === taskID) {
+              // If statusNumber is 1 (checked), set state to 3 (Completed). 
+              // If -1 (unchecked), set back to 1 (In progress).
+              const newState = statusNumber === 1 ? 3 : 1;
+              return { ...task, State: newState };
+            }
+            return task;
+          })
+        );
       }else{
         console.log(result.data);
       }
@@ -113,7 +124,7 @@ function MainPage(){
         <MainHeader helloMessage={greetingMessage} userName={name} sendTaskSorter={handleSortTasksChange} currentViewMode={viewMode}/>
         <hr/>
         <AddTaskMenu totalTasks={currentViewModeTasks} viewMode={viewMode}/>
-        <div className='tasksScrollMenu'>
+        <div className='flex-1 min-h-0 overflow-y-auto'>
           {
             userTasks && userTasks.length>0 ? (
               userTasks?.map((task,index)=>(

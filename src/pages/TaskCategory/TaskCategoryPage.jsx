@@ -55,9 +55,7 @@ function TaskCategoryPage(){
     return(
         <div className="w-full px-5 ">
             <TaskCategoryHeader taskCategories={taskCategories} splitSize={splitSize} sendTheSelectedCategory={handleChangeCategory}/>
-            <div className="overflow-y-scroll">
-                <TaskCategoryInfo taskCategory={selectedCategory}/>
-            </div>
+            <TaskCategoryInfo taskCategory={selectedCategory}/>
         </div>
     );
 }

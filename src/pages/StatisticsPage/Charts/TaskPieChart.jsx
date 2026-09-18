@@ -6,7 +6,7 @@ function TaskPieChart({totalTasks,data}) {
   });
   return (
     
-    <div className="w-full h-64">
+    <div className="w-full h-48 md:h-48">
       <ResponsiveContainer width="100%" height="100%">
         <PieChart>
           <Pie

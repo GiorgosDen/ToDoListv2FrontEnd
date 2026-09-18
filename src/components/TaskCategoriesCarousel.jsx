@@ -38,6 +38,7 @@ function TaskCategoriesCarousel({taskCategories,splitSize,getTheSelectedCategory
     const handleChangeCategory = (aCat)=>{
         getTheSelectedCategory(aCat);
     }
+    
     return(
         <div className="w-full flex rounded-xl gap-2 overflow-x-auto">
             {

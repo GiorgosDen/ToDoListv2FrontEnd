@@ -11,8 +11,8 @@ const colors = ['#8884d8', '#82ca9d', '#ffc658', '#ff7300'];
 
 function SimpleBarChart({chartData}) {
   return (
-    <div style={{ width: '100%', height: 300 }}>
-      <ResponsiveContainer>
+    <div className="w-full h-48 sm:h-64 md:h-80">
+      <ResponsiveContainer height={"100%"} width={"100%"}>
         <BarChart data={chartData}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="Name" />

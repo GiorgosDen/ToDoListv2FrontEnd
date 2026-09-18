@@ -4,27 +4,30 @@ import { RgbStringColorPicker } from "react-colorful";
 function TaskCategoryInfo({taskCategory}){
     const [categoryColor,setCategoryColor] = useState(taskCategory.ColorRGB);
     return(
-        <div className="w-full h-full flex-1 md:flex md:flex-wrap">
-            <div className="w-full md:w-1/2">
-                <div className="w-full flex flex-col">
+        <div className="w-full h-full">
+            <div className="w-full h-[70vh] overflow-y-auto">
+                <section className="w-full flex-1">
                     <label>Category Name:</label>
-                    <input type="text" value={taskCategory.Name} readOnly/>
-                </div>
-                <div className="w-full flex flex-col">
+                    <input type="text" value={taskCategory.Name} 
+                     className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-md placeholder:text-body"/>
+                </section>
+                <section>
                     <label>Category Description:</label>
-                    <textarea rows={3} value={taskCategory.Description} readOnly/>
-                </div>
+                    <textarea rows={3} value={taskCategory.Description} 
+                     className="min-h-24 max-h-24 md:min-h-32 md:max-h-32 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-md placeholder:text-body"/>
+                </section>
+                <section>
+                    <label>Task Category RGB Color:</label>
+                    <input type="text" value={categoryColor} 
+                     className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-md placeholder:text-body"
+                     readOnly/>
+                    <RgbStringColorPicker
+                        color={categoryColor}
+                        onChange={setCategoryColor}
+                    />
+                </section>
             </div>
-            <div className="w-full md:w-1/2 flex flex-col">    
-                <label>Task Category RGB Color:</label>
-                <input type="text" value={categoryColor} readOnly/>
-                <RgbStringColorPicker
-                    color={categoryColor}
-                    onChange={setCategoryColor}
-                />
-            </div>
-
-            <div className="flex w-full justify-end">
+            <div className="flex w-full justify-end gap-2">
                 <button>Create</button>
                 <button>Update</button>
                 <button>Delete</button>

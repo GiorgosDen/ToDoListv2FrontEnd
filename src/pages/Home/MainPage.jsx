@@ -11,6 +11,7 @@ import CompletedTaskMenu from './components/CompletedTaskMenu';
 import '../../App.css'
 import '../../index.css'
 import { useLocation, useOutletContext } from 'react-router-dom';
+import statisticsService from '../../services/statisticService';
 
 //socket connection
 const serverURL = import.meta.env.SERVER_URL;
@@ -34,19 +35,22 @@ function MainPage(){
   const [greetingMessage,setGreetingMessage] = useState('Hello');
 
   useEffect(()=>{
-    const getTasks =async()=>{
+    const getTasksData =async()=>{
       //Get initial tasks (or whenever the parameters change)
       try{
         const resTasks = await taskService.getUserTasks(viewMode);
-        if(resTasks){
+        const completedTasks = await statisticsService.getCompletedTasks(resTasks.userTasks);
+        if(resTasks && completedTasks){
           setCurrentViewModeTasks(resTasks.userTasks.length);
           setUserTasks(resTasks.userTasks);
+          setCompletedTasks(completedTasks.length);
         } 
       } catch (error) {
         console.log(error);
       }
     }
-    getTasks();
+
+    getTasksData();
 
     handleSortTasksChange('Time');
     //Create hello message

@@ -46,8 +46,8 @@ const statisticsService ={
         let taskTotalCompletedNumbers = chronologicalList.map((item, index) => ({
             id: index,
             name: item,
-            totalNum: 0,
-            ComplNum: 0
+            Total: 0,
+            Completed: 0
         }));
 
         return totalTasksList.reduce((acc, task) => {
@@ -69,9 +69,9 @@ const statisticsService ={
     
                 if (acc[index]) {
                     if (task.State === 3) {
-                        acc[index].ComplNum += 1;
+                        acc[index].Completed += 1;
                     }
-                    acc[index].totalNum += 1;
+                    acc[index].Total += 1;
                 }
 
                 return acc;

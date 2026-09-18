@@ -33,9 +33,10 @@ function MainPage(){
   const [completedTasks, setCompletedTasks] = useState(0);
   //Greeting
   const [greetingMessage,setGreetingMessage] = useState('Hello');
+  //Sorter 
+  const [taskSorter,setTaskSorter] = useState("Time");
 
-  useEffect(()=>{
-    const getTasksData =async()=>{
+  const getTasksData =async()=>{
       //Get initial tasks (or whenever the parameters change)
       try{
         const resTasks = await taskService.getUserTasks(viewMode);
@@ -49,7 +50,7 @@ function MainPage(){
         console.log(error);
       }
     }
-
+  useEffect(()=>{
     getTasksData();
 
     handleSortTasksChange('Time');
@@ -59,7 +60,7 @@ function MainPage(){
     //Listen to server for expired tasks update
     socket.on('tasks-updated',()=>{
       console.log("Server trigger receive: Refreshing task list...");
-      getTasks();
+      getTasksData();
     });
     //Clean up
     return ()=>{
@@ -68,14 +69,31 @@ function MainPage(){
 
   },[viewMode]);
 
+  //Get a datetime string: dd/mm/yyyy, hh:mm:ss 
+  //Returns a datetime string: yyyy-mm-ddThh:mm:ss
+  const changeDateTimeStringFormat = (aDateTime)=>{
+    const [Day,Month,Year] = aDateTime.split(", ")[0].split("/");
+    const [Hour,Minute,Second] = aDateTime.split(", ")[1].split(":");
+    return `${Year}-${Month}-${Day}T${Hour}:${Minute}:${Second}`;
+  }
+
   //Handle sort Tasks change
   const handleSortTasksChange = (sorter)=>{
-    if(sorter==="Time"){
-      setUserTasks([...userTasks].sort((a,b)=>{return (new Date(b.DateTime)-new Date(a.DateTime))}));  
-    }else{
-      setUserTasks([...userTasks].sort((a,b)=>{return (b.State-a.State)}));
-    }
+    setTaskSorter(sorter);
+    setUserTasks((prevTasks)=>{
+      const tasksCopy = [...prevTasks];
+      if(sorter==="Time"){
+        return tasksCopy.sort((a,b)=>{
+          const bDateString = changeDateTimeStringFormat(b.DateTime);
+          const aDateString = changeDateTimeStringFormat(a.DateTime);
+          return (new Date(bDateString)-new Date(aDateString));
+        });
+      }else{
+        return tasksCopy.sort((a,b)=>{return (b.State-a.State)});
+      }
+    });
   }
+
   //Handle checked Tasks
   const handleCheckTaskChange= async(taskID,statusNumber)=>{
     try {
@@ -84,17 +102,8 @@ function MainPage(){
       if(result.success){
         //Update counter
         setCompletedTasks(completedTasks+statusNumber);
-        setUserTasks((prevTasks) =>
-          prevTasks.map((task) => {
-            if (task.id === taskID) {
-              // If statusNumber is 1 (checked), set state to 3 (Completed). 
-              // If -1 (unchecked), set back to 1 (In progress).
-              const newState = statusNumber === 1 ? 3 : 1;
-              return { ...task, State: newState };
-            }
-            return task;
-          })
-        );
+        //Get the updated data
+        getTasksData();
       }else{
         console.log(result.data);
       }

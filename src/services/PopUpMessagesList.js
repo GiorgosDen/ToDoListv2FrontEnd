@@ -2,6 +2,14 @@
 
 const PopUpMessagesList =[
     {
+        status:200,
+        title:"Success",
+        description:"",
+        iconPath:"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z",
+        iconColor:"text-green-500",
+        buttonMessage:"Continue"
+    },
+    {
         status:201,
         title:"Success",
         description:"",
@@ -55,6 +63,30 @@ const PopUpMessagesList =[
         description:"Sory about that. Error with no suitable message.",
         iconPath:"M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z",
         iconColor:"text-gray-500",
+        buttonMessage:"Close"
+    },
+    {
+        status:'create-new-task-category',
+        title:"Create a New Task Category",
+        description:"Create new task category successful.",
+        iconPath:"M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z",
+        iconColor:"text-blue-500",
+        buttonMessage:"Close"
+    },
+    {
+        status:'update-task-category',
+        title:"Update Task Category",
+        description:"Update the Task Category Successful.",
+        iconPath:"M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z",
+        iconColor:"text-blue-500",
+        buttonMessage:"Close"
+    },
+    {
+        status:'task-category-delete',
+        title:"Delete Task Category",
+        description:"Delete the Task Category successful.",
+        iconPath:"M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z",
+        iconColor:"text-green-500",
         buttonMessage:"Close"
     },
     {

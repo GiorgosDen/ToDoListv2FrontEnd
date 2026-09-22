@@ -28,10 +28,9 @@ function TaskCategoryHeader({taskCategories,splitSize,sendTheSelectedCategory}){
         sendTheSelectedCategory(aCat);
     }
     return(
-        <div className="w-full flex flex-col justify-between items-start px-[2%] pb-[5%] pt-[3%]">
+        <div className="w-full flex flex-col justify-between items-start px-[2%] pb-[2%] pt-[3%]">
             <h2 className="font-bold text-lg md:text-xl mt-0">Task Categories</h2>
             <p className="text-xs md:text-sm mt-0">View and manage your task categories.</p>
-            <hr/>
             <TaskCategoriesCarousel taskCategories={taskCategories} splitSize={splitSize} getTheSelectedCategory={handleChangeCategory}/>
         </div>
     );

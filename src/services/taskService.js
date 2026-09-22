@@ -3,9 +3,10 @@ const taskService = {
     //View mode: day/week/month
     async getUserTasks(viewMode){
         try {
+            console.log(viewMode);
             const response =  await apiClient.get(`/tasks/${viewMode}`);
-            ///console.log("The Task I get");
-            //console.log(response.data);
+            console.log("The Task I get");
+            console.log(response.data);
             return response.data;
         } catch (error) {
             console.log(error);

@@ -32,7 +32,7 @@ function CheckTask({userTask, onCheckTaskChange, dailyTasks, completedTasks}){
   }
   useEffect(()=>{
     setTaskAppearence();
-  },[userTask.State, checkedBox]);
+  },[userTask.State, checkedBox, completedTasks]);
 
   const handleChange = (e) =>{
     const isChecked = e.target.checked;

@@ -53,7 +53,7 @@ function MainPage(){
   useEffect(()=>{
     getTasksData();
 
-    handleSortTasksChange('Time');
+    handleSortTasksChange(taskSorter);
     //Create hello message
     createHelloMessage();
 

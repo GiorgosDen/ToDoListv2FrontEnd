@@ -1,7 +1,7 @@
 import apiClient from "./apiClient";
 
 const taskPriorityService ={
-    async getTaskCategories(){
+    async getTaskPriorities(){
         try {
             const response = await apiClient.get('/priority');
             return response.data;

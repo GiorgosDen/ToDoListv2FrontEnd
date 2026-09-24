@@ -7,7 +7,7 @@ function LogSignLayout({triggerServerSideError}){
 
     return(
         <>
-           <div className="w-full h-full border-2 rounded-lg shadow-sm flex flex-col md:flex-row md:col-start-1 md:col-end-3">
+           <div className="overflow-hidden w-full h-full border-2 rounded-lg shadow-sm flex flex-col md:flex-row md:col-start-1 md:col-end-3">
                 {/*Stable Log In & Sing Up pages site*/}
                 <div id="imageArea" className="hidden md:flex md:flex-col md:z-0 md:bg-[rgb(240,244,255)] md:rounded-l-lg md:px-14 md:w-1/2">
                     <div className="md:group md:w-full md:h-10 md:inline-flex md:items-center md:justify-start md:text-gray-600 md:py-[10%]">
@@ -21,14 +21,14 @@ function LogSignLayout({triggerServerSideError}){
                         <label className="font-bold text-xl">Stay Organized, reach the success!!</label>
                         <label className="font-semibold text-md">Plan your day, set goals - all in one place</label>
                     </div>
-                    <div className=" w-96 h-64 px-5">
+                    <div className=" w-full h-full px-5">
                         <svg viewBox="90 20 100 75" className="w-full h-full">
                             <image href="./splitImg.svg" width="220" height="95"/>
                         </svg>
                     </div>
                 </div>
                 {/*Form split-screen (outlet) */}
-                <div id="loginFormArea" className="overflow-y-auto z-10 w-full h-full bg-[rgba(235, 240, 250)] md:bg-[rgb(255,255,255)] rounded-lg md:rounded-r-lg flex flex-col  px-14 py-3 gap-4">
+                <div id="loginFormArea" className="overflow-y-auto z-10 w-full h-full bg-[rgba(235, 240, 250)] md:bg-[rgb(255,255,255)] rounded-lg md:rounded-r-lg flex flex-col px-4 md:px-14 py-3 gap-4">
                     <Outlet context={{triggerServerSideError}}/>
                     {/*Image that shows at bottom area when a phone device is used*/}
                     <div className="w-full h-full py-5 md:hidden">

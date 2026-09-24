@@ -47,7 +47,7 @@ function StatisticsPage(){
                     setTotalCompletedNumbers((statisticsService.getTaskTotalCompletedNumbers("month",fetchTaskData)));
                 }
 
-                const taskPriorities = await taskPriorityService.getTaskCategories();
+                const taskPriorities = await taskPriorityService.getTaskPriorities();
                 if(taskPriorities){
                     setTaskPrioritiesNumbers(statisticsService.getPriorityNumbers(taskPriorities,fetchTaskData));
                 }

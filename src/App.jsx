@@ -9,8 +9,8 @@ import SignUp from './pages/SignUp/SignUp'
 import MainPage from './pages/Home/MainPage'
 import CreateNewTask from './pages/AddTask/CreateNewTask'
 import TaskPage from './pages/TaskPage/TaskPage'
-import TermsOfService from './pages/TermsAndPolicy/TermsOfService'
-import PrivacyPolicy from './pages/TermsAndPolicy/PrivacyPolicy'
+import TermsOfService from './TermsAndPolicy/TermsOfService'
+import PrivacyPolicy from './TermsAndPolicy/PrivacyPolicy'
 import './App.css'
 import './index.css'
 import ErrorMessagePopUp from './components/ErrorMessagePopUp'
@@ -18,6 +18,7 @@ import { setGlobalServerErrorHandler } from './services/apiClient'
 import UserPage from './pages/UserPage/UserPage'
 import StatisticsPage from './pages/StatisticsPage/StatisticsPage'
 import TaskCategoryPage from './pages/TaskCategory/TaskCategoryPage'
+import PrioritiesPage from './pages/PrioritiesPage/PrioritiesPage'
 
 function App() {
   //ErrorMessagePopUp States
@@ -66,6 +67,7 @@ function App() {
             <Route path="userSettings" element={<UserPage/>}/>
             <Route path="statistics" element={<StatisticsPage/>}/>
             <Route path="taskCategory" element={<TaskCategoryPage/>}/>
+            <Route path="priorities" element={<PrioritiesPage/>}/>
           </Route>
         </Routes>
         <ErrorMessagePopUp

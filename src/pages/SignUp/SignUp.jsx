@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Link, useNavigate, useOutletContext } from "react-router-dom";
 
 import authService from "../../services/authService";
+import PrivacyPolicy from "../../TermsAndPolicy/PrivacyPolicy";
+import TermsOfService from "../../TermsAndPolicy/TermsOfService";
 
 function SignUp(){
     const errorData = {
@@ -26,6 +28,20 @@ function SignUp(){
     const [userPassword, setUserPassword]= useState('');
     const [userVerPassword, setUserVerPassword]= useState('');
     const [agreeTerms, setAgreeTerms] = useState(false);
+    //Policy & Terms view state (boolean)
+    const [viewTermsPolicy, setViewTermsPolicy] = useState(false);
+    //Policy & Terms map state (string)
+    const [mapTermsPolicy, setMapTermsPolicy] = useState("terms");
+    //Component (Terms or Policy) map
+    const TermsPolicyMap = {
+        "policy":<PrivacyPolicy hidePage={()=>{hideTermsPolicy();}}/>,
+        "terms":<TermsOfService hidePage={()=>{hideTermsPolicy();}}/>
+    }
+
+    //Handle close Terms/Policy
+    const hideTermsPolicy = ()=>{
+        setViewTermsPolicy(false);
+    }
 
     //Handle click function
     const handleSignUp= async()=>{
@@ -97,7 +113,7 @@ function SignUp(){
     return(
         <>
         {/*User links to Log In page, if has a account */}
-        <div id="logInHeader" className="flex align-bottom justify-center md:justify-end gap-1 pt-2">
+        <div id="logInHeader" className="flex align-bottom justify-end gap-1 pt-2">
             <label className="text-sm">Already have an account?</label>
             <Link to={"/"} className="text-sm font-semibold text-blue-700"> Log in </Link>
         </div>
@@ -124,11 +140,19 @@ function SignUp(){
             {/*Agree Terms & Policy checkbox  */}
             <div id="agreedPanel"> 
                 <input type="checkbox" checked={agreeTerms} onChange={(ch)=>setAgreeTerms(ch.target.checked)}/>
-                <label className="text-gray-600 text-sm">I agree to the <Link to={'/terms'} className="text-blue-400 hover:underline hover:text-blue-700">Terms of Service</Link> & <Link to={'/policy'} className="text-blue-400 hover:underline hover:text-blue-700">Privacy Policy</Link></label>
+                <label className="text-gray-600 text-sm">I agree to the <span onClick={()=>{setViewTermsPolicy(true); setMapTermsPolicy("terms");}} className="text-blue-400 hover:underline hover:text-blue-700">Terms of Service</span> & <span onClick={()=>{setViewTermsPolicy(true); setMapTermsPolicy("policy");}} className="text-blue-400 hover:underline hover:text-blue-700">Privacy Policy</span></label>
                 <span className={`text-sm text-red-700 ${agreeTermsError}`}> *Must be agreed with Terms and Policy</span>
             </div>
             <button className="mt-2 py-2 bg-blue-700 text-white rounded-lg shadow-md hover:bg-blue-800"
              onClick={handleSignUp}>Create Account</button>
+        </div>
+        {/*Terms & Policy PopUp */}
+        <div className={`${viewTermsPolicy?'':'hidden'} fixed inset-0 flex items-center justify-center bg-black/50 z-50`}>
+            <div className={`overflow-y-auto min-h-0 w-4/5 h-4/5 flex items-center bg-white rounded-lg shadow-lg gap-2 px-4 pb-4`}>
+                {
+                    TermsPolicyMap[mapTermsPolicy]
+                }
+            </div>
         </div>
         </>
     );

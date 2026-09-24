@@ -42,6 +42,7 @@ function AddTaskForm(){
     const [taskTimeError, setTaskTimeError] = useState('hidden');
     const [taskDateError, setTaskDateError] = useState('hidden');
     const [taskReminderError, setTaskReminderError] = useState('hidden');
+    const [taskPriorityError, setTaskPriorityError] = useState('hidden');
     //Imported data hooks
     const [taskName,setTaskName] = useState('');
     const [taskDescription, setTaskDescription] = useState('');
@@ -49,6 +50,7 @@ function AddTaskForm(){
     const [taskTime, setTaskTime] = useState(todayTime);
     const [taskDate, setTaskDate] = useState(todayDate);
     const [taskReminder, setTaskReminder] = useState(0);
+    const [taskPriority, setTaskPriority] = useState(1);
     //Change Category Button hook
     const [activeButtonId, setActiveButtonId] = useState(-1);//if user doesn't select a category
     
@@ -67,6 +69,7 @@ function AddTaskForm(){
         setTaskCategoryError('hidden');
         setTaskDateError('hidden');
         setTaskReminderError('hidden');
+        setTaskPriorityError('hidden');
 
         //Evaluate imported data
         //1.Task Name
@@ -88,7 +91,7 @@ function AddTaskForm(){
                 "DateTime":timestampSC,
                 "category":taskCategory,
                 "state":1,
-                "priority":1,
+                "priority":taskPriority,
                 "reminder":taskReminder,
                 "repeat": 0
             }
@@ -124,17 +127,23 @@ function AddTaskForm(){
         setTaskCategory(aCat.id);
     }
     return(
-        <div className="h-[80vh] md:h-96 overflow-y-auto flex flex-col px-5">
+        <div className="h-[80vh] md:h-full overflow-y-auto flex flex-col px-5">
         <hr/>
         {/*Task Information (Name* & Description) Area*/}
         <div className="flex flex-col py-2">
             <label className="text-lg md:text-xl font-semibold">Task Information</label>
             <label className="text-base md:text-lg">Task Name <span className="text-red-700 text-xs md:text-sm font-bold">* <span className={taskNameError}>Add a Task Name</span></span></label>
-            <input type="text" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-[1.5%] py-[1.7%] shadow-xs placeholder:text-body" 
-            placeholder="Enter task name..." required value={taskName} onChange={(name)=>setTaskName(name.target.value)}/>
+            <input type="text" 
+             className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+             placeholder="Enter task name..."
+             required 
+             value={taskName} 
+             onChange={(name)=>setTaskName(name.target.value)}/>
             <label className="text-base md:text-lg">Description</label>
-            <textarea rows="4" className="min-h-24 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full p-3.5 shadow-xs placeholder:text-body" placeholder="Write additional details..."
-             value={taskDescription} onChange={(des)=>setTaskDescription(des.target.value)}></textarea>
+            <textarea rows="4" 
+             className="min-h-24 rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-y" placeholder="Write additional details..."
+             value={taskDescription} 
+             onChange={(des)=>setTaskDescription(des.target.value)}></textarea>
         </div>
         <hr/>
         {/*Task Schedule (Date, Time, Reminder) Area*/}
@@ -142,23 +151,50 @@ function AddTaskForm(){
         <div id="scheduleForm" className="flex flex-row flex-wrap gap-4 py-2">
             <div id="dateArea" className="w-1/3 flex flex-col">
                 <label className="text-base md:text-lg ">Due Date <span className="text-red-700 text-xs md:text-sm font-bold">* <span className={taskDateError}>Select a valid Date</span></span></label>
-                <input type="date" min={todayDate} value={taskDate} onChange={(date)=>setTaskDate(date.target.value)}/>
+                <input type="date" 
+                min={todayDate} 
+                value={taskDate} 
+                className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-60 hover:[&::-webkit-calendar-picker-indicator]:opacity-100"
+                onChange={(date)=>setTaskDate(date.target.value)}/>
             </div>
             <div id="timeArea" className="w-1/3 flex flex-col">
                 <label className="text-base md:text-lg ">Time <span className="text-red-700 text-xs md:text-sm font-bold">* <span className={taskTimeError}>Add a Task Time</span></span></label>
-                <input type="time" value={taskTime} onChange={(time)=> setTaskTime(time.target.value)}/>
+                <input type="time" 
+                 value={taskTime} 
+                 className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-60 hover:[&::-webkit-calendar-picker-indicator]:opacity-100"
+                 onChange={(time)=> setTaskTime(time.target.value)}/>
             </div>
-            <div id="reminderArea" className="w-1/3 flex flex-col">
-                <label className="text-base md:text-lg ">Reminder <span className="text-red-700 text-xs md:text-sm font-bold">* <span className={taskReminderError}>Add a Task Time</span></span></label>
-                <div>
-                    <select value={taskReminder} onChange={(rem)=>setTaskReminder(Number(rem.target.value))}>
-                        <option value={0} disabled>Reminder</option>
-                        <option value={30}>30 minutes</option>
-                        <option value={60}>1 hour</option>
-                        <option value={90}>1.5 hour</option>
-                    </select>
+            <div id="reminder-priorityArea" className="w-full flex flex-row flex-wrap gap-8 md:gap-5 py-2">
+                <div id="reminderArea" className="w-1/3 flex flex-col gap-1">
+                    <label className="text-base md:text-lg ">Reminder <span className="text-red-700 text-xs md:text-sm font-bold">* <span className={taskReminderError}>Add a Task Time</span></span></label>
+                    <div>
+                        <select 
+                        value={taskReminder} 
+                        className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+                        onChange={(rem)=>setTaskReminder(Number(rem.target.value))}>
+                            <option value={0} disabled>Reminder</option>
+                            <option value={0}>None</option>
+                            <option value={30}>30 minutes</option>
+                            <option value={60}>1 hour</option>
+                            <option value={90}>1.5 hour</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="priorityArea" className="w-1/3 flex flex-col gap-1">
+                    <label className="text-base md:text-lg ">Priority <span className="text-red-700 text-xs md:text-sm font-bold">* <span className={taskPriorityError}>Add a Task Time</span></span></label>
+                    <div>
+                        <select 
+                        value={taskPriority} 
+                        className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+                        onChange={(rem)=>setTaskPriority(Number(rem.target.value))}>
+                            <option value={1}>Low</option>
+                            <option value={2}>Medium</option>
+                            <option value={3}>High</option>
+                        </select>
+                    </div>
                 </div>
             </div>
+            
         </div>
         <hr/>
         {/*Category Area*/}

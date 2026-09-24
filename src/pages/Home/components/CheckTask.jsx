@@ -53,7 +53,10 @@ function CheckTask({userTask, onCheckTaskChange, dailyTasks, completedTasks}){
 
         <div className="flex flex-col">
           <span className="task-title">{userTask.Name} <span className="font-semibold text-red-700">{taskStatusMessage}</span></span>
-          <span className="text-xs text-gray-500">{userTask.Category?userTask.CatName:'Not availiable'}</span>
+          <div className="flex flex-row gap-2">
+            <span className="text-xs lg:text-md text-gray-500">{userTask.Category?userTask.CatName:'Not availiable'}</span>
+            <span className="px-1 rounded-xl bg-blue-400 text-xs lg:text-md text-gray-100">{userTask.Priority?userTask.PrName:'Not availiable'}</span>
+          </div>
         </div>
       </div>
       <div className='flex justify-between gap-2'>

@@ -11,8 +11,16 @@ function TaskInfoPanel({aTask}){
              disabled readOnly/>
             <label className="text-base md:text-lg">Description</label>
             <textarea rows="4" className="h-16 text-gray-700 bg-neutral-secondary-medium border border-default-medium text-heading text-xs md:text-sm rounded-base" defaultValue={"This version doesn't support task description..."} disabled readOnly/>
-            <label className="text-base md:text-lg">Category</label>
-            <button className="w-1/3 bg-transparent border text-gray-700 border-gray-500 py-1 px-2 rounded-2xl" disabled>{aTask.CatName}</button>
+            <div className="w-full flex flex-row gap-5">
+                <div className="w-1/3 flex flex-col">
+                    <label className="text-base md:text-lg">Category</label>
+                    <button className="w-full bg-transparent border text-gray-700 border-gray-500 py-1 px-2 rounded-2xl" disabled>{aTask.CatName}</button>
+                </div>
+                <div className="w-1/3 flex flex-col">
+                    <label className="text-base md:text-lg">Priority</label>
+                    <button className="w-full bg-transparent border text-gray-700 border-gray-500 py-1 px-2 rounded-2xl" disabled>{aTask.PrName}</button>
+                </div>
+            </div>
             <label className="text-base md:text-lg">Schedule</label>
             <div className="flex justify-between gap-2">
                 <input type="text" value={yyyyMMDD} className="bg-neutral-secondary-medium text-gray-700 border border-default-medium text-heading text-xs md:text-sm rounded-base block w-full px-[1.5%] py-[1.7%] shadow-xs" disabled readOnly/>

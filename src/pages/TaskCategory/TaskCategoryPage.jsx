@@ -11,14 +11,19 @@ import TaskCategoryInfo from "./Components/TaskCategoryInfo";
     category add form(popup?) */}
 
 function TaskCategoryPage(){
+    const dummyTaskCategory = {
+        id:0,
+        Name:"Selected",
+        Description:"Selected Task Category",
+        ColorRGB:"rgb(125,125,255)",
+        creatorID:0
+    }
     const {triggerPopUpMessage} = useOutletContext();
     //Categories carousel Split size (mobile:3, laptop: 2)
     const [splitSize,setSplitSize] = useState(3); 
     //Task Categories hook
     const [taskCategories, setTaskCategories] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState({
-        id:0,Name:"Selected",Description:"Selected Task Category",ColorRGB:"rgb(125,125,255)",creatorID:null
-    });
+    const [selectedCategory, setSelectedCategory] = useState(dummyTaskCategory);
     //Trigger useEffect state
     const [trigger,setTrigger] = useState(0);
 
@@ -61,7 +66,7 @@ function TaskCategoryPage(){
     const handleActionOnCategory = async(paramsObject)=>{
         try {
             const {actionCode,catID,catData} = paramsObject;
-            console.log(catData);
+            //console.log(catData);
             let results = [];
             if(actionCode===1){
                 results = await taskCatService.createTaskCategory(catData);

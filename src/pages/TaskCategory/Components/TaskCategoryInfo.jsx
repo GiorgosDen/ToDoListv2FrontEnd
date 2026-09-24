@@ -8,14 +8,20 @@ function TaskCategoryInfo({taskCategory,sendActionData}){
     const [categoryColor,setCategoryColor] = useState(taskCategory.ColorRGB);
     //Enable update button hook
     const [enableUpdateButton, setEnableUpdateButton] = useState(false);
+    //Create button clicks counter (resterts every time that selected category changes)
+    const [createButtonClicks, setcreateButtonClicks] = useState(0);
 
     useEffect(()=>{
         setCategoryName(taskCategory.Name);
         setCategoryDescription(taskCategory.Description);
         setCategoryColor(taskCategory.ColorRGB);
         setEnableUpdateButton(false);
+        setcreateButtonClicks(false);
     },[taskCategory]);
 
+    const handleCreateButtonClickCounter = (aBoolean)=>{
+        aBoolean?setcreateButtonClicks(pr=>pr+=1):setcreateButtonClicks(0);
+    }
     const handleUpdateButtonEnable = (aBoolean)=>{
         //If it is a user's category 
         if(taskCategory.creatorID){
@@ -26,7 +32,7 @@ function TaskCategoryInfo({taskCategory,sendActionData}){
     const handleTaskCategoryCUD=(code)=>{
         //Input: code, an integer (1:create,2:update,3:delete)
         //Output: {actionCode,formData}
-        if(taskCategory.creatorID){
+        if(taskCategory.creatorID || createButtonClicks>0){
             const updatedData={
                 Name:categoryName,
                 Description:categoryDescription,
@@ -72,8 +78,8 @@ function TaskCategoryInfo({taskCategory,sendActionData}){
             </div>
 
             <div className="flex w-full justify-end gap-2 pt-5 pb-10 md:pr-20">
-                <button className="font-semibold text-white bg-blue-700 py-1 px-3 rounded-lg hover:bg-blue-800 shadow-sm"
-                 onClick={()=>handleTaskCategoryCUD(1)}>Create
+                <button className={`font-semibold text-white ${createButtonClicks>0?'bg-blue-700':'bg-gray-700'} py-1 px-3 rounded-lg ${createButtonClicks>0?'hover:bg-blue-800':'hover:bg-gray-800'} shadow-sm`}
+                 onClick={()=>createButtonClicks>0?handleTaskCategoryCUD(1):setcreateButtonClicks(true)}>Create
                 </button>
                 <button className={`font-semibold text-white ${enableUpdateButton?'bg-blue-300':'bg-gray-300'} py-1 px-3 rounded-lg hover:${enableUpdateButton?'bg-blue-400':'bg-gray-400'} shadow-sm`}
                  onClick={()=>{if(enableUpdateButton)handleTaskCategoryCUD(2);}} disabled={!enableUpdateButton}

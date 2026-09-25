@@ -134,14 +134,14 @@ function AddTaskForm(){
             <label className="text-lg md:text-xl font-semibold">Task Information</label>
             <label className="text-base md:text-lg">Task Name <span className="text-red-700 text-xs md:text-sm font-bold">* <span className={taskNameError}>Add a Task Name</span></span></label>
             <input type="text" 
-             className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500" 
+             className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500" 
              placeholder="Enter task name..."
              required 
              value={taskName} 
              onChange={(name)=>setTaskName(name.target.value)}/>
             <label className="text-base md:text-lg">Description</label>
             <textarea rows="4" 
-             className="min-h-24 rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-y" placeholder="Write additional details..."
+             className="min-h-24 rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 resize-y" placeholder="Write additional details..."
              value={taskDescription} 
              onChange={(des)=>setTaskDescription(des.target.value)}></textarea>
         </div>
@@ -154,14 +154,14 @@ function AddTaskForm(){
                 <input type="date" 
                 min={todayDate} 
                 value={taskDate} 
-                className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-60 hover:[&::-webkit-calendar-picker-indicator]:opacity-100"
+                className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-60 hover:[&::-webkit-calendar-picker-indicator]:opacity-100"
                 onChange={(date)=>setTaskDate(date.target.value)}/>
             </div>
             <div id="timeArea" className="w-1/3 flex flex-col">
                 <label className="text-base md:text-lg ">Time <span className="text-red-700 text-xs md:text-sm font-bold">* <span className={taskTimeError}>Add a Task Time</span></span></label>
                 <input type="time" 
                  value={taskTime} 
-                 className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-60 hover:[&::-webkit-calendar-picker-indicator]:opacity-100"
+                 className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 [&::-webkit-calendar-picker-indicator]:cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-60 hover:[&::-webkit-calendar-picker-indicator]:opacity-100"
                  onChange={(time)=> setTaskTime(time.target.value)}/>
             </div>
             <div id="reminder-priorityArea" className="w-full flex flex-row flex-wrap gap-8 md:gap-5 py-2">
@@ -170,7 +170,7 @@ function AddTaskForm(){
                     <div>
                         <select 
                         value={taskReminder} 
-                        className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+                        className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 cursor-pointer"
                         onChange={(rem)=>setTaskReminder(Number(rem.target.value))}>
                             <option value={0} disabled>Reminder</option>
                             <option value={0}>None</option>
@@ -185,7 +185,7 @@ function AddTaskForm(){
                     <div>
                         <select 
                         value={taskPriority} 
-                        className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500 cursor-pointer"
+                        className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 cursor-pointer"
                         onChange={(rem)=>setTaskPriority(Number(rem.target.value))}>
                             <option value={1}>Low</option>
                             <option value={2}>Medium</option>

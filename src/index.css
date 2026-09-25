@@ -11,7 +11,7 @@
     nav{
         @apply md:flex md:flex-col justify-start border border-gray-200 rounded-l-xl bg-slate-100;
         @apply md:col-start-1;
-        @apply md:overflow-y-auto min-h-0 h-screen;
+        @apply overflow-y-auto min-h-0 h-screen;
         @apply pl-2;
     }
     main{
@@ -31,6 +31,13 @@
     }
     .tasksScrollMenu{
         @apply h-80 overflow-y-auto border rounded-lg p-2;
+    }
+    .customScrollStyle{
+        @apply [&::-webkit-scrollbar]:w-2;
+        @apply [&::-webkit-scrollbar]:h-2;
+        @apply [&::-webkit-scrollbar-track]:bg-purple-100; 
+        @apply [&::-webkit-scrollbar-thumb]:bg-purple-300; 
+        @apply [&::-webkit-scrollbar-thumb]:rounded-full;
     }
     hr{
         @apply my-2;

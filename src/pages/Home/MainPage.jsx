@@ -133,7 +133,7 @@ function MainPage(){
         <MainHeader helloMessage={greetingMessage} userName={name} sendTaskSorter={handleSortTasksChange} currentViewMode={viewMode}/>
         <hr/>
         <AddTaskMenu totalTasks={currentViewModeTasks} viewMode={viewMode}/>
-        <div className='flex-1 min-h-0 overflow-y-auto'>
+        <div className="flex-1 min-h-0 overflow-y-auto customScrollStyle">
           {
             userTasks && userTasks.length>0 ? (
               userTasks?.map((task,index)=>(

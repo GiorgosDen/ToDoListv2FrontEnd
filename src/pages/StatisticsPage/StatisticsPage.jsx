@@ -66,11 +66,11 @@ function StatisticsPage(){
             <div className="w-full shrink-0 sticky top-0 z-10">
                 <StatisticsHeader completedTasks={completedTasks.length} totalTasks={userTasks.length}/>
             </div>            
-            <div className="w-full flex-1 flex flex-wrap overflow-y-auto p-4 gap-4 min-h-0">
+            <div className="w-full flex-1 flex flex-wrap overflow-y-auto p-4 gap-4 min-h-0 customScrollStyle">
                 <div className="w-full h-fit md:w-[25%] flex flex-col items-center justify-center border-2">
                     <h1>Tasks By Category:</h1>
                     <TaskPieChart totalTasks={userTasks.length} data={taskCategoriesNumbers}/>
-                    <div className="flex flex-col items-start">
+                    <div className="w-fit flex flex-col items-start overflow-y-auto min-h-0 max-h-32 customScrollStyle">
                     {
                         taskCategoriesRates.map((cat,index)=>(
                             <div key={index} className="flex align-bottom gap-1">
@@ -95,7 +95,7 @@ function StatisticsPage(){
                 </div>
                 <div className="w-full md:w-[55%] flex flex-col items-center justify-center border-2 cursor-pointer">
                     <h1>Recent Activity:</h1>
-                    <div className="w-full flex-1 overflow-y-auto max-h-80 py-2 px-2 gap-2 min-h-0">
+                    <div className="w-full flex-1 overflow-y-auto max-h-80 py-2 px-2 gap-2 min-h-0 customScrollStyle">
                     {
                         userTasks.map((task,index)=>{
                             let currColor = "";

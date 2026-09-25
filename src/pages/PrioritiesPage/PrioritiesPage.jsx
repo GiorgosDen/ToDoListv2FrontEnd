@@ -20,13 +20,13 @@ function PrioritiesPage(){
     },[]);
 
     return(
-        <div className="w-full h-full flex flex-col gap-4 py-5 px-5">
+        <div className="w-full h-full flex flex-col gap-4 py-5 px-5 cursor-pointer">
             <section>
                 <h1 className="font-bold text-lg md:text-xl lg:text-2xl">Task Priorities</h1>
                 <p className="text-xs md:text-sm lg:text-md">See tasks priorities.</p>
                 <hr/>
             </section>
-            <div className="w-full flex flex-col gap-4 pb-5">
+            <div className="w-full flex flex-col  customScrollStyle overflow-y-auto min-h-0 gap-4 pb-5">
                 {
                     taskPriorities.map((priority,index)=>{
                         return (<section key={index} className="w-full flex flex-col gap-2">

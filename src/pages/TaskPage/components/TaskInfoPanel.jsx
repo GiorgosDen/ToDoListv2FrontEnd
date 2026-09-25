@@ -10,7 +10,7 @@ function TaskInfoPanel({aTask}){
             <input type="text" value={aTask.Name} className="bg-neutral-secondary-medium text-gray-700 border border-default-medium text-heading text-sm md:text-sm rounded-base block w-full px-[1.5%] py-[1.7%] shadow-xs" 
              disabled readOnly/>
             <label className="text-base md:text-lg">Description</label>
-            <textarea rows="4" className="h-16 text-gray-700 bg-neutral-secondary-medium border border-default-medium text-heading text-xs md:text-sm rounded-base" defaultValue={"This version doesn't support task description..."} disabled readOnly/>
+            <textarea rows="4" className="h-16 text-gray-700 bg-neutral-secondary-medium border border-default-medium text-heading text-xs md:text-sm rounded-base" value={aTask.Description} disabled readOnly/>
             <div className="w-full flex flex-row gap-5">
                 <div className="w-1/3 flex flex-col">
                     <label className="text-base md:text-lg">Category</label>

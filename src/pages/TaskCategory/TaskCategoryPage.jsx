@@ -93,7 +93,7 @@ function TaskCategoryPage(){
             <div className="w-full shrink-0 sticky top-0 z-10">
                 <TaskCategoryHeader taskCategories={taskCategories} splitSize={splitSize} sendTheSelectedCategory={handleChangeCategory}/>
             </div>
-            <div className="w-full flex-1 overflow-y-auto min-h-0">
+            <div className="w-full flex-1 overflow-y-auto min-h-0 customScrollStyle">
                 <TaskCategoryInfo taskCategory={selectedCategory} sendActionData={handleActionOnCategory}/>
             </div>
         </div>

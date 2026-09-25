@@ -40,10 +40,10 @@ function TaskCategoriesCarousel({taskCategories,splitSize,getTheSelectedCategory
     }
     
     return(
-        <div className="w-full flex rounded-xl gap-2 overflow-x-auto">
+        <div className="w-full flex rounded-xl gap-2 overflow-x-auto customScrollStyle pb-1">
             {
                 splitedCategories.map((team, indexTeam)=>(
-                    <section key={indexTeam} className="w-full md:w-1/4 flex flex-col gap-1 border">{
+                    <section key={indexTeam} className="w-full md:w-1/4 flex flex-col gap-1 ">{
                         team.map((cat)=> 
                             <button type="button" key={cat.id} id={cat.id} 
                                     style={{

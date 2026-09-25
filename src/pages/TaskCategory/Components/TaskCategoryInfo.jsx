@@ -48,27 +48,27 @@ function TaskCategoryInfo({taskCategory,sendActionData}){
     }    
 
     return(
-        <div className="w-full h-full">
+        <div className="w-full h-full px-2">
             <div className="w-full md:grid md:grid-cols-2 md:gap-20">
-                <div>
-                    <section className="w-full">
+                <div className="flex md:gap-5 flex-col">
+                    <section className="w-full flex flex-col gap-2">
                         <label>Category Name:</label>
                         <input type="text" value={categoryName}
                          onChange={(name)=>{setCategoryName(name.target.value); handleUpdateButtonEnable(true);}} 
-                         className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-md placeholder:text-body"/>
+                         className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 cursor-pointer"/>
                     </section>
-                    <section className="w-full">
+                    <section className="w-full  flex flex-col gap-2">
                         <label>Category Description:</label>
                         <textarea rows={3} value={categoryDescription}
                          onChange={(des)=>{setCategoryDescription(des.target.value); handleUpdateButtonEnable(true);}}
-                         className="min-h-24 max-h-24 md:min-h-32 md:max-h-32 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-md placeholder:text-body"/>
+                         className="min-h-24 max-h-24 md:min-h-32 md:max-h-32 rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 cursor-pointer"/>
                     </section>
                 </div>
-                <section className="w-full flex flex-col gap-4">
+                <section className="w-full flex flex-col gap-2">
                     <label>Task Category RGB Color:</label>
                     <input type="text" value={categoryColor}
                      onChange={(color)=>{setCategoryColor(color.target.value);}}
-                     className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-md placeholder:text-body"
+                     className="rounded-lg border border-gray-300 bg-white px-4 py-2 text-gray-700 shadow-sm transition-all focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 cursor-pointer"
                      readOnly/>
                     <RgbStringColorPicker
                         color={categoryColor}

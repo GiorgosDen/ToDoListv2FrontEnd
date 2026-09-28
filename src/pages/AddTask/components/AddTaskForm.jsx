@@ -1,30 +1,35 @@
 import { useEffect, useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useOutletContext, useLocation, useNavigate } from "react-router-dom";
 import taskCatService from "../../../services/taskCatService";
 import taskService from "../../../services/taskService";
 import TaskCategoriesCarousel from "../../../components/TaskCategoriesCarousel";
+import PopUpMessagesList from "../../../services/PopUpMessagesList";
 
 {/**Task JSON Form:
-    id:,
-    state:in Progress/Completed/Expired,
-    name:"",
-    description:"",
-    datetime: timestamp from selected datetime (yyyy-mm-dd hh:mm:ss),
-    reminder: 0,
-    category: "Work"/"..."/"Other" 
+    id: integer -> MySQL: int auto increament,
+    state: in Progress/Completed/Expired -> MySQL: (1/2/3),
+    name: String -> MySQL: varchar,
+    description: String -> MySQL: varchar,
+    date & time: String & String -[]->MySQL: timestamp ,
+    reminder: None, 30 minutes, 1 hour, 1.5 hour -> MySQL: 0,30,60,90 
+    category: "Work"/"..."/"Other"/user's categories -> MySQL: int/category id 
 
   **Notes:
-    1. The data that plays an active role is: Tasks's Name, Time and Category
-    2. The Reminder saves a number for the minutes (example, 1 hour -> 60)
-    3. Excluding active role data, the rest is store with default values 
-    4. In future updates, the form will be fully functional
-    5. All tasks are saved in localstorage as a list with key "tasks"
-    6. To pass a task ID property, a Count (keyname:'count') that is saved in localstorage is used
-    7. The count increased with task creation by 1. So represents all tasks created in the usage app history
+    1. The Reminder saves a number for the minutes (example, 1 hour -> 60)
+    2. A user can create their custom categories
+    3. The Reminder hasn't got functional proposal in this version
+
+  **Params:
+    1. Action (String): "create"/"update"
+    2. aTask (user's Task): null / JSON object {id, Name, ...}
 */}
 
-function AddTaskForm(){
-    //Get the today's date
+function AddTaskForm({action,aTask,navigatePath}){
+    const {triggerPopUpMessage} = useOutletContext();
+    //set Form Action
+    const FormActionCreate = action==="create"?true:false;
+    
+    // Get today's date & time for fallbacks
     const newDate = new Date();
     const todayDate = newDate.toLocaleDateString('en-CA');
     const todayTime = newDate.toLocaleTimeString('en-GB',{ 
@@ -33,7 +38,7 @@ function AddTaskForm(){
         second: '2-digit', 
         hour12: false 
     });
-    //console.log(`${todayDate} ${todayTime}`);
+
     //Task Categories hook
     const [taskCategories, setTaskCategories] = useState([]);
     //Hide error messages hooks
@@ -48,18 +53,44 @@ function AddTaskForm(){
     const [taskDescription, setTaskDescription] = useState('');
     const [taskCategory,setTaskCategory] = useState('');
     const [taskTime, setTaskTime] = useState(todayTime);
-    const [taskDate, setTaskDate] = useState(todayDate);
+    const [taskDate, setTaskDate] = useState(todayTime);
     const [taskReminder, setTaskReminder] = useState(0);
     const [taskPriority, setTaskPriority] = useState(1);
     //Change Category Button hook
     const [activeButtonId, setActiveButtonId] = useState(-1);//if user doesn't select a category
     
-    //Navigate
-    const navigate = useNavigate();
+    useEffect(() => {
+        console.log("Loaded aTask:", aTask?.DateTime);
+        
+        if (!FormActionCreate && aTask) {
+            setTaskName(aTask.Name || '');
+            setTaskDescription(aTask.Description || '');
+            setTaskCategory(aTask.Category || '');
+            setActiveButtonId(aTask.Category || -1);
+            setTaskReminder(aTask.Reminder || 0);
+            setTaskPriority(aTask.Priority || 1);
 
+            // Parse formatted date string "DD/MM/YYYY, HH:mm:ss"
+            if (aTask.DateTime) {
+                const parts = String(aTask.DateTime).match(/(\d+)/g);
+                if (parts && parts.length >= 3) {
+                    const [day, month, year] = parts;
+                    setTaskDate(`${year}-${month}-${day}`);
+                }
+                if (parts && parts.length >= 5) {
+                    const [, , , hours, minutes, seconds = '00'] = parts;
+                    setTaskTime(`${hours}:${minutes}:${seconds}`);
+                }
+            }
+        }
+    }, [aTask, FormActionCreate]);
+
+    //Navigate & Location
+    const navigate = useNavigate();
+    const location = useLocation();
     //Handle Category choice
     //Handle create task
-    const createNewTask =async ()=>{
+    const createUpdateTask =async ()=>{
         //Controll imported data
         
         //Refresh form's warning messages
@@ -96,13 +127,32 @@ function AddTaskForm(){
                 "repeat": 0
             }
             console.log(newTask);
-            //Create the new task
-            const result = await taskService.createNewTask(newTask);
-            //console.log(result);
-            //If everything is ok, return a message
-            if(result.message) navigate("/home");
+            if(aTask.State===3){
+                const matchedError = PopUpMessagesList.find(mess => mess.status === 'update-completed');
+                triggerPopUpMessage(matchedError);
+            }else{
+                //Create the new task or update an existing one
+                if(FormActionCreate){
+                    const cResult = await taskService.createNewTask(newTask);
+                    //If everything is ok, return a message
+                    if(cResult.message) navigate("/home");
+                }else{
+                    const uResult = await taskService.updateTaskByID(aTask.id,newTask);
+                    if(uResult.message) window.location.reload();
+                }
+            }
         }else{
-            console.log("Unvalid Data / Create new Task fail");
+            console.log("Unvalid Data / Create new or Delete old Task fail");
+        }
+    }
+
+
+    //Refresh to current page if Action="update"
+    const handleFormExit = ()=>{
+        if(FormActionCreate){
+            navigate(navigatePath);
+        }else{
+            window.location.reload();
         }
     }
 
@@ -127,7 +177,7 @@ function AddTaskForm(){
         setTaskCategory(aCat.id);
     }
     return(
-        <div className="h-[80vh] md:h-full overflow-y-auto flex flex-col px-5">
+        <div className="h-[80vh] md:h-full overflow-y-auto flex flex-col px-5 bg-white">
         <hr/>
         {/*Task Information (Name* & Description) Area*/}
         <div className="flex flex-col py-2">
@@ -207,14 +257,13 @@ function AddTaskForm(){
         {/*Submit or Quit Area*/}
         <hr/>
             <div className="flex justify-end p-2 gap-4">
-                <Link to={"/home"}>
-                <button type="button" className="bg-transparent hover:bg-gray-400 hover:bg-opacity-30 text-gray-700 py-1 px-2 border border-gray-500 hover:border-gray-700 rounded">
+                <button type="button" className="bg-transparent hover:bg-gray-400 hover:bg-opacity-30 text-gray-700 py-1 px-2 border border-gray-500 hover:border-gray-700 rounded"
+                 onClick={handleFormExit}>
                     Cancel
                 </button>
-                </Link>
                 <button className="bg-blue-500 hover:bg-blue-700 text-sm text-white px-2 py-2 rounded"
-                onClick={createNewTask}>
-                    + Create Task
+                 onClick={createUpdateTask}>
+                    {FormActionCreate?'+ Create Task':'Update'}
                 </button>
             </div>
     </div>

@@ -6,7 +6,7 @@ function CreateNewTask(){
     return(
         <div>
            <AddTaskHeader/>
-           <AddTaskForm/>
+           <AddTaskForm action={"create"} aTask={[]} navigatePath={`/home`}/>
         </div>
     );
 }

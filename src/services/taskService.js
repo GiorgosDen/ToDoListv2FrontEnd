@@ -45,6 +45,7 @@ const taskService = {
     },
     //Update 1 or more task columns
     async updateTaskByID(taskID,taskData){
+        console.log(taskData);
         try {
             const response = await apiClient.put(`/tasks/${taskID}`,taskData);
             return response.status;

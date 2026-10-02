@@ -14,8 +14,10 @@ import { useLocation, useOutletContext } from 'react-router-dom';
 import statisticsService from '../../services/statisticService';
 
 //socket connection
-const serverURL = import.meta.env.SERVER_URL;
-const socket = io(serverURL);
+const serverURL = import.meta.env.VITE_SERVER_URL || "http://localhost:3000";
+const socket = io(serverURL,{
+    withCredentials: true,
+});
 
 function MainPage(){
 

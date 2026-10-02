@@ -3,6 +3,7 @@ import axios from "axios";
 import PopUpMessagesList from "./PopUpMessagesList";
 
 let globalServerErrorHandler = null;
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 //Used to in interceptors response
 const datetimeFormatter = new Intl.DateTimeFormat('en-GB',{
@@ -16,7 +17,7 @@ const datetimeFormatter = new Intl.DateTimeFormat('en-GB',{
 })
 
 const apiClient =  axios.create({
-    baseURL: 'http://localhost:3000/',
+    baseURL: API_URL,
     headers: {
     'Content-Type': 'application/json',
     },

@@ -87,7 +87,7 @@ function UpdatedForm(){
                     Delete User
                 </button>
             </section>
-            <div className={`${viewDeletePopUp?'hidden':''} fixed inset-0 flex items-center justify-center bg-black/50 z-50`}>
+            <div className={`${viewDeletePopUp?'':'hidden'} fixed inset-0 flex items-center justify-center bg-black/50 z-50`}>
                 <div className="flex flex-col items-center w-[90%] md:w-[50%] bg-white rounded-lg shadow-lg p-6 gap-2">
                     <svg className={`w-16 h-16 md:w-24 md:h-24 mr-2 shrink-0 fill-current text-red-800 transition-colors`} 
                         viewBox="0 0 24 24">

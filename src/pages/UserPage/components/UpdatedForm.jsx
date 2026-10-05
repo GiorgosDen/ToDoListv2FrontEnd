@@ -91,7 +91,7 @@ function UpdatedForm(){
                 <div className="flex flex-col items-center w-[90%] md:w-[50%] bg-white rounded-lg shadow-lg p-6 gap-2">
                     <svg className={`w-16 h-16 md:w-24 md:h-24 mr-2 shrink-0 fill-current text-red-800 transition-colors`} 
                         viewBox="0 0 24 24">
-                        <path d={iconPath} 
+                        <path d={"M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"} 
                         fill="currentColor" />
                     </svg>
                     <div className="text-center">

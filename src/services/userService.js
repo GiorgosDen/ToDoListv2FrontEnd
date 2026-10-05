@@ -10,6 +10,15 @@ const userService ={
             console.log(error);
             throw error;
         }
+    },
+    async getUserData(){
+        try {
+            const response = await apiClient.get("/user");
+            return response.data;
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
     }
 }
 

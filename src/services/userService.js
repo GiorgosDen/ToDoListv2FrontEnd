@@ -19,6 +19,20 @@ const userService ={
             console.log(error);
             throw error;
         }
+    },
+    async deleteUser(){
+        try {
+            const logOutRes = await apiClient.post('/auth/logout');
+            const deleteUserRes = await apiClient.delete("/user");
+            if(logOutRes && deleteUserRes){
+                return true;
+            }else{
+                return false;
+            }
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
     }
 }
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import userService from "../../../services/userService";
 import PopUpMessagesList from "../../../services/PopUpMessagesList";
 
@@ -13,6 +13,7 @@ function UpdatedForm(){
     const [userNewFullName, setUserNewFullName] = useState('');
 
     const [viewDeletePopUp, setViewDeletePopUp] = useState(false);
+    const navigate = useNavigate();
 
     const updateUserData = async()=>{
         setNewFullNameError('hidden');
@@ -53,7 +54,12 @@ function UpdatedForm(){
 
     const deleteUserData = async()=>{
         try {
-            
+            const results = await userService.deleteUser();
+            if(results){
+                const matchedError =  PopUpMessagesList.find((err)=>err.status===200);
+                triggerPopUpMessage(matchedError);
+                navigate("/");
+            }
         } catch (error) {
             console.log(error);
             throw error;
@@ -101,7 +107,7 @@ function UpdatedForm(){
                     <button onClick={()=> setViewDeletePopUp(false)} className="w-full h-8 md:h-12 bg-blue-700 hover:bg-blue-800 text-xs md:text-sm text-white px-2 py-1 rounded">
                         Cancel 
                     </button>
-                    <button onClick={()=> setViewDeletePopUp(false)} className="w-full h-8 md:h-12 bg-red-700 hover:bg-red-800 text-xs md:text-sm text-white px-2 py-1 rounded">
+                    <button onClick={()=> deleteUserData()} className="w-full h-8 md:h-12 bg-red-700 hover:bg-red-800 text-xs md:text-sm text-white px-2 py-1 rounded">
                         Delete 
                     </button>
                 </div>

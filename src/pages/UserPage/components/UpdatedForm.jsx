@@ -29,11 +29,9 @@ function UpdatedForm(userName,userEmail){
         //6-> change email & password
         //7->change all
         let count = 0;
-        userNewFullName==='' || userNewFullName.length>2?count+=1:setNewFullNameError('');
-        userNewEmail==='' || userNewEmail.endsWith("@gmail.com")?count+=2:setNewEmailError('');
-        userNewPassword==='' || userNewPassword.length>=8?count+=4: setNewPasswordError('');
-
-        if(userNewFullName==='' && userNewEmail==='' && userNewPassword==='') count=0;
+        userNewFullName.length>0?count+=1:setNewFullNameError('');
+        userNewEmail.endsWith("@gmail.com")?count+=2:setNewEmailError('');
+        userNewPassword.length>=8?count+=4: setNewPasswordError('');
 
         const userNewData ={
             fullName:userNewFullName,

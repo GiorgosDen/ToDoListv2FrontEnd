@@ -7,7 +7,7 @@ function NavFooter({userName}){
         try {
             const response = await authService.logOutService();
             if(response.success){
-                navigate("/");
+                navigate("/",{ replace: true });
             }
         } catch (error) {
             console.log(error);

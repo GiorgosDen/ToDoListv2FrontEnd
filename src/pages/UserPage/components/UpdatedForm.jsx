@@ -58,7 +58,7 @@ function UpdatedForm(){
             if(results){
                 const matchedError =  PopUpMessagesList.find((err)=>err.status===200);
                 triggerPopUpMessage(matchedError);
-                navigate("/");
+                navigate("/",{ replace: true });
             }
         } catch (error) {
             console.log(error);

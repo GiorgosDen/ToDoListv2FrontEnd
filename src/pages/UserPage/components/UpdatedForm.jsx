@@ -3,7 +3,7 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 import userService from "../../../services/userService";
 import PopUpMessagesList from "../../../services/PopUpMessagesList";
 
-function UpdatedForm(){
+function UpdatedForm(userName,userEmail){
     const {triggerPopUpMessage} = useOutletContext();
     const [emailError,setNewEmailError] = useState('hidden');
     const [passwordError,setNewPasswordError] = useState('hidden');
@@ -21,24 +21,37 @@ function UpdatedForm(){
         setNewPasswordError('hidden');
 
         //check imported data
+        //1->change fullname
+        //2->change email
+        //4->change password
+        //3-> change fullname & email
+        //5->change fullname & password
+        //6-> change email & password
+        //7->change all
         let count = 0;
         userNewFullName==='' || userNewFullName.length>2?count+=1:setNewFullNameError('');
-        userNewEmail==='' || userNewEmail.endsWith("@gmail.com")?count+=1:setNewEmailError('');
-        userNewPassword==='' || userNewPassword.length>=8?count+=1: setNewPasswordError('');
+        userNewEmail==='' || userNewEmail.endsWith("@gmail.com")?count+=2:setNewEmailError('');
+        userNewPassword==='' || userNewPassword.length>=8?count+=4: setNewPasswordError('');
 
         if(userNewFullName==='' && userNewEmail==='' && userNewPassword==='') count=0;
 
         const userNewData ={
             fullName:userNewFullName,
             email:userNewEmail,
-            password:userNewPassword
+            password:userNewPassword,
+            curFullName: userName,
+            curEmail: userEmail
         }
 
-        if(count===3){
+        if(count>0){
             try {
-                const results = await userService.updateUserData(userNewData);
+                const results = await userService.updateUserData(userNewData,count);
                 if(results){
-                    const matchedError =  PopUpMessagesList.find((err)=>err.status===201);
+                    let matchedError =  PopUpMessagesList.find((err)=>err.status===201);
+                    //If email doesnt change
+                    if(count===1 || count===4 || count===5){
+                        matchedError = PopUpMessagesList.find((err)=>err.status===200);
+                    }
                     triggerPopUpMessage(matchedError);
                 }
             } catch (error) {

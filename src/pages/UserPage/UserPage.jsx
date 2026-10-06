@@ -30,7 +30,7 @@ function UserPage(){
             <hr/>
             <UserAvatar userName={userFullName} userEmail={userEmail}/>
             <hr/>
-            <UpdatedForm/>
+            <UpdatedForm userName={userFullName} userEmail={userEmail}/>
         </div>
     )
 }

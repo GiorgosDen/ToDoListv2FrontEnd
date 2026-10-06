@@ -13,9 +13,9 @@ const userService ={
             //const response = await apiClient.put("/user",userData);
             const {fullName,email,password,curFullName,curEmail} = userData;
             let response = null;
+            console.log("UserService receives the counter:",count);
             switch (count){
                 case 1:
-                    console.log(fullName);
                     response = await apiClient.patch('/user/fullname',{fullName:fullName});
                     break;
                 case 2:

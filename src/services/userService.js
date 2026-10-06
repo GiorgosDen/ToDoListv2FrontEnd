@@ -15,6 +15,7 @@ const userService ={
             let response = null;
             switch (count){
                 case 1:
+                    console.log(fullName);
                     response = await apiClient.patch('/user/fullname',{fullName:fullName});
                     break;
                 case 2:

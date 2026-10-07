@@ -68,7 +68,7 @@ function UpdatedForm(userName,userEmail){
             curFullName: userName,
             curEmail: userEmail
         }
-
+        console.log("userNewData:",userNewData);
         if(count>0 && callUpdateService){
             try {
                 const results = await userService.updateUserData(userNewData,count);

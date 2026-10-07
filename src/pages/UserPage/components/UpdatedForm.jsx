@@ -3,7 +3,7 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 import userService from "../../../services/userService";
 import PopUpMessagesList from "../../../services/PopUpMessagesList";
 
-function UpdatedForm({userName,userEmail,informAvatar}){
+function UpdatedForm({userName,userEmail,setUserName,informAvatar}){
     const {triggerPopUpMessage} = useOutletContext();
     const [emailError,setNewEmailError] = useState('hidden');
     const [newPasswordError,setNewPasswordError] = useState('hidden');
@@ -53,13 +53,14 @@ function UpdatedForm({userName,userEmail,informAvatar}){
 
         //New And Current Password
         if(userNewPassword.length>=8 && userCurrentPassword.length>=8){
+            setUserName(userNewFullName);//Visual User Avatar Updating 
             count+=4;
         }else if(userNewPassword.length>0 && userNewPassword.length<8 && userCurrentPassword.length>0 && userCurrentPassword.length<8){
             setNewPasswordError('');
             setCurrentPasswordError('');
-        }else if(userNewPassword.length>=8 && !userCurrentPassword.length>=8){
+        }else if(userNewPassword.length>=8 && userCurrentPassword.length<8){
             setCurrentPasswordError('');
-        }else if(!userNewPassword.length>=8 && userCurrentPassword.length>=8){
+        }else if(userNewPassword.length<8 && userCurrentPassword.length>=8){
             setNewPasswordError('');
         }
 

@@ -6,10 +6,12 @@ import PopUpMessagesList from "../../../services/PopUpMessagesList";
 function UpdatedForm(userName,userEmail){
     const {triggerPopUpMessage} = useOutletContext();
     const [emailError,setNewEmailError] = useState('hidden');
-    const [passwordError,setNewPasswordError] = useState('hidden');
+    const [newPasswordError,setNewPasswordError] = useState('hidden');
+    const [currentPasswordError,setCurrentPasswordError] = useState('hidden');
     const [fullNameError, setNewFullNameError] = useState('hidden');
     const [userNewEmail, setUserNewEmail] = useState('');
     const [userNewPassword, setUserNewPassword]= useState('');
+    const [userCurrentPassword, setUserCurrentPassword] = useState('');
     const [userNewFullName, setUserNewFullName] = useState('');
 
     const [viewDeletePopUp, setViewDeletePopUp] = useState(false);
@@ -18,6 +20,7 @@ function UpdatedForm(userName,userEmail){
     const updateUserData = async()=>{
         setNewFullNameError('hidden');
         setNewEmailError('hidden');
+        setCurrentPasswordError('hidden');
         setNewPasswordError('hidden');
 
         //check imported data
@@ -29,19 +32,44 @@ function UpdatedForm(userName,userEmail){
         //6-> change email & password
         //7->change all
         let count = 0;
-        userNewFullName.length>0?count+=1:setNewFullNameError('');
-        userNewEmail.endsWith("@gmail.com")?count+=2:setNewEmailError('');
-        userNewPassword.length>=8?count+=4: setNewPasswordError('');
+        let callUpdateService = true;
+
+        //Full Name
+        if(userNewFullName.length>0){
+            count+=1;
+        }else if(userNewFullName.length<0){
+            setNewFullNameError('');
+        }
+        
+        //Email
+        if(userNewEmail.length>10 && userNewEmail.endsWith("@gmail.com")){
+            count+=2;
+        }else if(userNewEmail.length>0 && userNewEmail.length<10 && !userNewEmail.endsWith("@gmail.com")){
+            setNewEmailError('');
+        }
+
+        //New And Current Password
+        if(userNewPassword.length>=8 && userCurrentPassword.length>=8){
+            count+=4;
+        }else if(userNewPassword.length>0 && userNewPassword.length<8 && userCurrentPassword.length>0 && userCurrentPassword.length<8){
+            setNewPasswordError('');
+            setCurrentPasswordError('');
+        }else if(userNewPassword.length>=8 && !userCurrentPassword.length>=8){
+            setCurrentPasswordError('');
+        }else if(!userNewPassword.length>=8 && userCurrentPassword.length>=8){
+            setNewPasswordError('');
+        }
 
         const userNewData ={
             fullName:userNewFullName,
             email:userNewEmail,
             password:userNewPassword,
+            curPassword:userCurrentPassword,
             curFullName: userName,
             curEmail: userEmail
         }
 
-        if(count>0){
+        if(count>0 && callUpdateService){
             try {
                 const results = await userService.updateUserData(userNewData,count);
                 if(results){
@@ -90,9 +118,12 @@ function UpdatedForm(userName,userEmail){
                 <label className="text-md">Email Address <span className={`text-sm text-red-700 ${emailError}`}>*Unvalid email</span></label>
                 <input type="text" id="first_name" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-md placeholder:text-body" 
                     placeholder="Import new email" required value={userNewEmail} onChange={(em)=>setUserNewEmail(em.target.value)}/>
-                <label className="text-md">Password <span className={`text-sm text-red-700 ${passwordError}`}>*Unvalid password</span></label>
+                <label className="text-md"> Current Password <span className={`text-sm text-red-700 ${currentPasswordError}`}>*Unvalid password</span></label>
                 <input type="password" id="first_name" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-md placeholder:text-body" 
-                    placeholder="Import new password" required value={userNewPassword} onChange={(pass)=>setUserNewPassword(pass.target.value)}/>
+                    placeholder="Import Current password" required value={userCurrentPassword} onChange={(pass)=>setUserCurrentPassword(pass.target.value)}/>
+                <label className="text-md">New Password <span className={`text-sm text-red-700 ${newPasswordError}`}>*Wrong current password</span></label>
+                <input type="password" id="first_name" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-md placeholder:text-body" 
+                    placeholder="Import new password" required value={userNewPassword} onChange={(pass)=>setUserNewPassword(pass.target.value)}/>      
             </section>
             <section className="w-[90%] flex">
                 <button className="w-1/3 mt-2 py-2 bg-blue-700 text-white rounded-lg shadow-md hover:bg-blue-800"

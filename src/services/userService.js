@@ -11,8 +11,8 @@ const userService ={
         //7->change all
         try {
             //const response = await apiClient.put("/user",userData);
-            const {fullName,email,password,curFullName,curEmail} = userData;
-            let response = null;
+            const {fullName,email,password,curPassword,curFullName,curEmail} = userData;
+            let response = {};
             console.log("UserService receives the counter:",count);
             switch (count){
                 case 1:
@@ -26,7 +26,10 @@ const userService ={
                     });
                     break;
                 case 4:
-                    response = await apiClient.patch('/user/password',{password:password});
+                    response = await apiClient.patch('/user/password',{
+                        password:password,
+                        curPassword:curPassword
+                    });
                     break;
                 case 3:
                     const [nameRes3,emailRes3] = await Promise.all([
@@ -42,7 +45,10 @@ const userService ={
                 case 5:
                     const [nameRes5, passRes5] = await Promise.all([
                         apiClient.patch('/user/fullname',{fullName:fullName}),
-                        apiClient.patch('/user/password',{password:password})
+                        apiClient.patch('/user/password',{
+                            password:password,
+                            curPassword:curPassword
+                        })
                     ])
                     response = {nameRes5,passRes5};
                     break;
@@ -53,14 +59,20 @@ const userService ={
                             oldEmail:curEmail,
                             newEmail:email
                         }),
-                        apiClient.patch('/user/password',{password:password})
+                        apiClient.patch('/user/password',{
+                            password:password,
+                            curPassword:curPassword
+                        })
                     ]);
                     response = {emailRes6,passRes6};
                     break;
                 case 7:
                     const [fullnameRes, passwordRes, emailRes] = await Promise.all([
                         apiClient.patch('/user/fullname',{fullName:fullName}),
-                        apiClient.patch('/user/password',{password:password}),
+                        apiClient.patch('/user/password',{
+                            password:password,
+                            curPassword:curPassword
+                        }),
                         apiClient.post('/user',{
                             fullName:curFullName,
                             oldEmail:curEmail,

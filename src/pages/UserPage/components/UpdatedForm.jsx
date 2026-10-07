@@ -18,7 +18,7 @@ function UpdatedForm({userName,userEmail,informAvatar}){
     const navigate = useNavigate();
 
     const updateReloadAvatar = ()=>{
-        informAvatar(1);
+        informAvatar((prev)=>prev+1);
     }
     const updateUserData = async()=>{
         setNewFullNameError('hidden');

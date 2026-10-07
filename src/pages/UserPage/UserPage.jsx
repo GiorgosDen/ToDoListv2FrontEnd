@@ -24,16 +24,13 @@ function UserPage(){
         getUserData();
     },[reloadAvatar]);
 
-    const updateReloadAvatar = (aNumber)=>{
-        setReloadAvatar((prev)=>prev+1);
-    }
     return(
         <div className="flex flex-col justify-between items-start px-[2%] pb-[5%] pt-[3%] gap-4 md:gap-1">
             <UserHeader/>
             <hr/>
             <UserAvatar userName={userFullName} userEmail={userEmail}/>
             <hr/>
-            <UpdatedForm userName={userFullName} userEmail={userEmail} informAvatar={updateReloadAvatar}/>
+            <UpdatedForm userName={userFullName} userEmail={userEmail} informAvatar={setReloadAvatar}/>
         </div>
     )
 }

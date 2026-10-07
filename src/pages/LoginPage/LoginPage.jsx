@@ -1,7 +1,7 @@
 {/*Contains the Login page's split-screen form */}
 
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 //service
 import authService from "../../services/authService";
 

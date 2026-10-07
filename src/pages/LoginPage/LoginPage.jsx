@@ -1,11 +1,12 @@
 {/*Contains the Login page's split-screen form */}
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 //service
 import authService from "../../services/authService";
 
 function LoginPage(){
+    const {triggerPopUpMessage} = useOutletContext();
     //Navigate state
     const navigate = useNavigate();
     //Error states (usage as a tailwind class hidden for form labels)
@@ -15,6 +16,24 @@ function LoginPage(){
     const [userEmail, setUserEmail] = useState('');
     const [userPassword, setUserPassword]= useState('');
 
+    useEffect(()=>{
+        const findURLParams = ()=>{
+            const queryParams = new URLSearchParams(window.location.search);
+            const status = queryParams.get('status');
+
+            if (status) {
+                const matchedError = PopUpMessagesList.find(err => String(err.status) === String(status));
+        
+                if (matchedError) {
+                    triggerPopUpMessage(matchedError); 
+                }
+        
+                //clear hrl from params on refresh page
+                window.history.replaceState({}, document.title, window.location.pathname);
+            }
+        }
+        findURLParams();
+    },[]);
     //Handle click function
     const handleLogin= async (e)=>{
         if (e) e.preventDefault();

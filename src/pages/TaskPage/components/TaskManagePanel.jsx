@@ -49,6 +49,10 @@ function TaskManagePanel({aTask,taskState}){
         }
     }
 
+    const changePopUpVisibility = (aBoolean)=>{
+        setUpdateFormView(aBoolean)
+    }
+
     return(
         
         <div className="flex justify-end gap-2 pt-2">
@@ -65,7 +69,7 @@ function TaskManagePanel({aTask,taskState}){
              onClick={deleteTask}>Delete</button>
 
              <div id="updateFormPopUp" className={`${updateFormView?'':'hidden'} fixed inset-0 flex items-center justify-center bg-black/50 z-50`}>
-                 <AddTaskForm action={"update"} aTask={aTask} navigatePath={``}/>
+                 <AddTaskForm action={"update"} aTask={aTask} navigatePath={``} hidePopUpForm={changePopUpVisibility}/>
              </div>
         </div>
     );

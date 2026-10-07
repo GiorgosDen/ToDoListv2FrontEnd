@@ -24,7 +24,7 @@ import PopUpMessagesList from "../../../services/PopUpMessagesList";
     2. aTask (user's Task): null / JSON object {id, Name, ...}
 */}
 
-function AddTaskForm({action,aTask,navigatePath}){
+function AddTaskForm({action,aTask,navigatePath,hidePopUpForm}){
     const {triggerPopUpMessage} = useOutletContext();
     //set Form Action
     const FormActionCreate = action==="create"?true:false;
@@ -152,7 +152,7 @@ function AddTaskForm({action,aTask,navigatePath}){
         if(FormActionCreate){
             navigate(navigatePath);
         }else{
-            window.location.reload();
+            hidePopUpForm(false);
         }
     }
 

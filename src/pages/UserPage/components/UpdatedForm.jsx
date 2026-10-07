@@ -3,7 +3,7 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 import userService from "../../../services/userService";
 import PopUpMessagesList from "../../../services/PopUpMessagesList";
 
-function UpdatedForm(userName,userEmail){
+function UpdatedForm({userName,userEmail}){
     const {triggerPopUpMessage} = useOutletContext();
     const [emailError,setNewEmailError] = useState('hidden');
     const [newPasswordError,setNewPasswordError] = useState('hidden');
@@ -68,7 +68,7 @@ function UpdatedForm(userName,userEmail){
             curFullName: userName,
             curEmail: userEmail
         }
-        console.log("userNewData:",userNewData);
+        
         if(count>0 && callUpdateService){
             try {
                 const results = await userService.updateUserData(userNewData,count);

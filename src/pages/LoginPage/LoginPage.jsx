@@ -23,7 +23,7 @@ function LoginPage(){
             const status = queryParams.get('status');
 
             if (status) {
-                const matchedError = PopUpMessagesList.find(err => String(err.status) === String(status));
+                const matchedError = PopUpMessagesList.find((err) => err.status === status);
         
                 if (matchedError) {
                     triggerPopUpMessage(matchedError); 

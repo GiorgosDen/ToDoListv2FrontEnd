@@ -7,7 +7,7 @@ import PopUpMessagesList from "../../services/PopUpMessagesList";
 import authService from "../../services/authService";
 
 function LoginPage(){
-    const {triggerServerSideError} = useOutletContext();
+    const {triggerPopUpMessage} = useOutletContext();
     //Navigate state
     const navigate = useNavigate();
     //Error states (usage as a tailwind class hidden for form labels)
@@ -27,7 +27,7 @@ function LoginPage(){
                 const matchedError = PopUpMessagesList.find((err) => err.status === statusNumber);
         
                 if (matchedError) {
-                    triggerServerSideError(matchedError); 
+                    triggerPopUpMessage(matchedError); 
                 }
         
                 //clear hrl from params on refresh page

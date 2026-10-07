@@ -8,7 +8,7 @@ import UserHeader from "./components/UserHeader";
 function UserPage(){
     const [userFullName, setUserFullName] = useState('A user name');
     const [userEmail, setUserEmail] = useState('A user email');
-
+    const [reloadAvatar, setReloadAvatar] = useState(0);
     useEffect(()=>{
         const getUserData = async()=>{
             try {
@@ -22,15 +22,18 @@ function UserPage(){
             }
         }
         getUserData();
-    },[]);
+    },[reloadAvatar]);
 
+    const updateReloadAvatar = (aNumber)=>{
+        setReloadAvatar((prev)=>prev+1);
+    }
     return(
         <div className="flex flex-col justify-between items-start px-[2%] pb-[5%] pt-[3%] gap-4 md:gap-1">
             <UserHeader/>
             <hr/>
             <UserAvatar userName={userFullName} userEmail={userEmail}/>
             <hr/>
-            <UpdatedForm userName={userFullName} userEmail={userEmail}/>
+            <UpdatedForm userName={userFullName} userEmail={userEmail} informAvatar={updateReloadAvatar}/>
         </div>
     )
 }

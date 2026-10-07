@@ -3,7 +3,7 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 import userService from "../../../services/userService";
 import PopUpMessagesList from "../../../services/PopUpMessagesList";
 
-function UpdatedForm({userName,userEmail}){
+function UpdatedForm({userName,userEmail,informAvatar}){
     const {triggerPopUpMessage} = useOutletContext();
     const [emailError,setNewEmailError] = useState('hidden');
     const [newPasswordError,setNewPasswordError] = useState('hidden');
@@ -17,6 +17,9 @@ function UpdatedForm({userName,userEmail}){
     const [viewDeletePopUp, setViewDeletePopUp] = useState(false);
     const navigate = useNavigate();
 
+    const updateReloadAvatar = ()=>{
+        informAvatar(1);
+    }
     const updateUserData = async()=>{
         setNewFullNameError('hidden');
         setNewEmailError('hidden');
@@ -79,6 +82,7 @@ function UpdatedForm({userName,userEmail}){
                         matchedError = PopUpMessagesList.find((err)=>err.status===200);
                     }
                     triggerPopUpMessage(matchedError);
+                    updateReloadAvatar();//To reload user Avatar
                 }
             } catch (error) {
                 console.log(error);

@@ -104,7 +104,9 @@ function UpdatedForm({userName,userEmail,setUserName,informAvatar}){
                 userEmail:userEmail
             }
             const results = await userService.deactivateUserAccount(userData);
+            console.log("Deactivate success");
             const logOut  = await authService.logOutService();
+            console.log("Clear cookie success");
             if(results){
                 const matchedError =  PopUpMessagesList.find((err)=>err.status===200);
                 triggerPopUpMessage(matchedError);

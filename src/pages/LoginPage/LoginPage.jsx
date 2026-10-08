@@ -23,7 +23,7 @@ function LoginPage(){
             const status = queryParams.get('status');
 
             if (status) {
-                const statusNumber = Number(status);
+                const statusNumber = status==='signup-email'?'signup-email':Number(status);
                 const matchedError = PopUpMessagesList.find((err) => err.status === statusNumber);
         
                 if (matchedError) {

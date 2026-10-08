@@ -5,6 +5,7 @@ import { Link, useNavigate, useOutletContext } from "react-router-dom";
 import authService from "../../services/authService";
 import PrivacyPolicy from "../../TermsAndPolicy/PrivacyPolicy";
 import TermsOfService from "../../TermsAndPolicy/TermsOfService";
+import PopUpMessagesList from "../../services/PopUpMessagesList";
 
 function SignUp(){
     const {triggerPopUpMessage} = useOutletContext();

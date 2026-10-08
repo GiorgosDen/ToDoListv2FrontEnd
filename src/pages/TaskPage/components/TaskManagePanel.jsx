@@ -48,15 +48,6 @@ function TaskManagePanel({aTask,taskState}){
             triggerPopUpMessage(matchedError);
         }
     }
-
-    const updateTaskState = async()=>{
-        const updatedState = await taskService.updateTaskStateByID(aTask.ID);
-        if(updatedState){
-            const matchedError = PopUpMessagesList.find(err => err.status === 'change-state');
-            triggerPopUpMessage(matchedError);
-        } 
-    }
-
     const changePopUpVisibility = (aBoolean)=>{
         setUpdateFormView(aBoolean)
     }
@@ -69,8 +60,6 @@ function TaskManagePanel({aTask,taskState}){
                     Return
                 </button>
             </Link>
-            <button className="font-semibold text-white bg-blue-400 py-1 px-3 rounded-lg hover:bg-blue-500 shadow-sm"
-                onClick={updateTaskState}>Change State</button>
             <button className="py-1 px-2 bg-blue-700 text-white rounded-lg shadow-md hover:bg-blue-800"
              onClick={()=>setUpdateFormView(true)}>
                 Update

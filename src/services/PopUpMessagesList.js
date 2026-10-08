@@ -74,7 +74,7 @@ const PopUpMessagesList =[
         buttonMessage:"Close"
     },
     {
-        status:424,
+        status:422,
         title:"BlackList Email",
         description:"Our system has blocked this email for policy violations.",
         iconPath:"M12,2C17.52,2 22,6.48 22,12C22,17.52 17.52,22 12,22C6.48,22 2,17.52 2,12C2,6.48 6.48,2 12,2M12,4C10.1,4 8.37,4.67 7,5.77L18.23,17.03C19.33,15.63 20,13.9 20,12C20,7.58 16.42,4 12,4M5.77,7C4.67,8.37 4,10.1 4,12C4,16.42 7.58,20 12,20C13.9,20 15.63,19.33 17.03,18.23L5.77,7Z",

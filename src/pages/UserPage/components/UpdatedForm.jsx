@@ -96,9 +96,13 @@ function UpdatedForm({userName,userEmail,setUserName,informAvatar}){
         }
     }
 
-    const deleteUserData = async()=>{
+    const deactivateUserAccount = async()=>{
         try {
-            const results = await userService.deactivateUserAccount();
+            const userData = {
+                userFullName:userName,
+                userEmail:userEmail
+            }
+            const results = await userService.deactivateUserAccount(userData);
             if(results){
                 const matchedError =  PopUpMessagesList.find((err)=>err.status===200);
                 triggerPopUpMessage(matchedError);
@@ -154,7 +158,7 @@ function UpdatedForm({userName,userEmail,setUserName,informAvatar}){
                     <button onClick={()=> setViewDeletePopUp(false)} className="w-full h-8 md:h-12 bg-blue-700 hover:bg-blue-800 text-xs md:text-sm text-white px-2 py-1 rounded">
                         Cancel 
                     </button>
-                    <button onClick={()=> deleteUserData()} className="w-full h-8 md:h-12 bg-red-700 hover:bg-red-800 text-xs md:text-sm text-white px-2 py-1 rounded">
+                    <button onClick={()=> deactivateUserAccount()} className="w-full h-8 md:h-12 bg-red-700 hover:bg-red-800 text-xs md:text-sm text-white px-2 py-1 rounded">
                         Delete 
                     </button>
                 </div>

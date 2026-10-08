@@ -97,9 +97,9 @@ const userService ={
             throw error;
         }
     },
-    async deactivateUserAccount(){
+    async deactivateUserAccount(userData){
         try {
-            const deactivateUser = await apiClient.post("/user/deactivate-email");
+            const deactivateUser = await apiClient.post("/user/deactivate-email",userData);
             const logOutRes = await apiClient.post('/auth/logout');
             if(deactivateUser && logOutRes){
                 return true;

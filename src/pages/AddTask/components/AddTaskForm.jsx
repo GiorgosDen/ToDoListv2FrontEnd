@@ -135,7 +135,11 @@ function AddTaskForm({action,aTask,navigatePath,hidePopUpForm}){
                 if(FormActionCreate){
                     const cResult = await taskService.createNewTask(newTask);
                     //If everything is ok, return a message
-                    if(cResult.message) navigate("/home");
+                    if(cResult.message){
+                        const matchedError = PopUpMessagesList.find(mess => mess.status === 'create-task');
+                        triggerPopUpMessage(matchedError);
+                        navigate("/home");
+                    }
                 }else{
                     const uResult = await taskService.updateTaskByID(aTask.id,newTask);
                     if(uResult.message) window.location.reload();

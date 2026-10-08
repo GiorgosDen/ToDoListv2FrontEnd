@@ -19,7 +19,7 @@ const userService ={
                     response = await apiClient.patch('/user/fullname',{fullName:fullName});
                     break;
                 case 2:
-                    response = await apiClient.post('/user',{
+                    response = await apiClient.post('/user/update-email',{
                         fullName:curFullName,
                         oldEmail:curEmail,
                         newEmail:email
@@ -34,7 +34,7 @@ const userService ={
                 case 3:
                     const [nameRes3,emailRes3] = await Promise.all([
                         apiClient.patch('/user/fullname',{fullName:fullName}),
-                        apiClient.post('/user',{
+                        apiClient.post('/user/update-email',{
                             fullName:curFullName,
                             oldEmail:curEmail,
                             newEmail:email
@@ -54,7 +54,7 @@ const userService ={
                     break;
                 case 6:
                     const [emailRes6,passRes6] = await Promise.all([
-                        apiClient.post('/user',{
+                        apiClient.post('/user/update-email',{
                             fullName:curFullName,
                             oldEmail:curEmail,
                             newEmail:email
@@ -73,7 +73,7 @@ const userService ={
                             password:password,
                             curPassword:curPassword
                         }),
-                        apiClient.post('/user',{
+                        apiClient.post('/user/update-email',{
                             fullName:curFullName,
                             oldEmail:curEmail,
                             newEmail:email
@@ -97,11 +97,11 @@ const userService ={
             throw error;
         }
     },
-    async deleteUser(){
+    async deactivateUserAccount(){
         try {
-            const deleteUserRes = await apiClient.delete("/user");
+            const deactivateUser = await apiClient.post("/user/deactivate-email");
             const logOutRes = await apiClient.post('/auth/logout');
-            if(logOutRes && deleteUserRes){
+            if(deactivateUser && logOutRes){
                 return true;
             }else{
                 return false;

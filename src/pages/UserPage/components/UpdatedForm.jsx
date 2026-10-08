@@ -98,7 +98,7 @@ function UpdatedForm({userName,userEmail,setUserName,informAvatar}){
 
     const deleteUserData = async()=>{
         try {
-            const results = await userService.deleteUser();
+            const results = await userService.deactivateUserAccount();
             if(results){
                 const matchedError =  PopUpMessagesList.find((err)=>err.status===200);
                 triggerPopUpMessage(matchedError);

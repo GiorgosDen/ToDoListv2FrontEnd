@@ -7,6 +7,7 @@ import PrivacyPolicy from "../../TermsAndPolicy/PrivacyPolicy";
 import TermsOfService from "../../TermsAndPolicy/TermsOfService";
 
 function SignUp(){
+    const {triggerPopUpMessage} = useOutletContext();
     //Navigate state
     const navigate = useNavigate();
     //Error states (usage as a tailwind class hidden for form labels)
@@ -97,6 +98,10 @@ function SignUp(){
             }
             const result = await authService.signUpService(signUpData);
             if(result.success){
+                const matchedMessage = PopUpMessagesList.find((err) => err.status === 'signup-email');
+                if (matchedMessage) {
+                    triggerPopUpMessage(matchedMessage); 
+                }
                 navigate("/");
             }
         }

@@ -100,8 +100,7 @@ const userService ={
     async deactivateUserAccount(userData){
         try {
             const deactivateUser = await apiClient.post("/user/deactivate-email",userData);
-            const logOutRes = await apiClient.post('/auth/logout');
-            if(deactivateUser && logOutRes){
+            if(deactivateUser){
                 return true;
             }else{
                 return false;

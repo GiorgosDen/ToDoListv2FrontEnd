@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import userService from "../../../services/userService";
+import authService from "../../../services/authService";
 import PopUpMessagesList from "../../../services/PopUpMessagesList";
 
 function UpdatedForm({userName,userEmail,setUserName,informAvatar}){
@@ -103,10 +104,13 @@ function UpdatedForm({userName,userEmail,setUserName,informAvatar}){
                 userEmail:userEmail
             }
             const results = await userService.deactivateUserAccount(userData);
+            const logOut  = await authService.logOutService();
             if(results){
                 const matchedError =  PopUpMessagesList.find((err)=>err.status===200);
                 triggerPopUpMessage(matchedError);
-                navigate("/",{ replace: true });
+                if(logOut){
+                    navigate("/",{ replace: true });
+                }
             }
         } catch (error) {
             console.log(error);

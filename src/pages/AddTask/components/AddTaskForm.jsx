@@ -181,7 +181,7 @@ function AddTaskForm({action,aTask,navigatePath,hidePopUpForm}){
         setTaskCategory(aCat.id);
     }
     return(
-        <div className="h-[80vh] md:h-full overflow-y-auto flex flex-col px-5 bg-white">
+        <div className="h-[80vh] md:h-full overflow-y-auto customScrollStyle flex flex-col px-5 bg-white">
         <hr/>
         {/*Task Information (Name* & Description) Area*/}
         <div className="flex flex-col py-2">

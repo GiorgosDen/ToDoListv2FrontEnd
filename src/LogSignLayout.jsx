@@ -28,7 +28,7 @@ function LogSignLayout({triggerPopUpMessage}){
                     </div>
                 </div>
                 {/*Form split-screen (outlet) */}
-                <div id="loginFormArea" className="overflow-y-auto z-10 w-full h-full bg-[rgba(235, 240, 250)] md:bg-[rgb(255,255,255)] rounded-lg md:rounded-r-lg flex flex-col px-4 md:px-14 py-3 gap-4">
+                <div id="loginFormArea" className="overflow-y-auto customScrollStyle z-10 w-full h-full bg-[rgba(235, 240, 250)] md:bg-[rgb(255,255,255)] rounded-lg md:rounded-r-lg flex flex-col px-4 md:px-14 py-3 gap-4">
                     <Outlet context={{triggerPopUpMessage}}/>
                     {/*Image that shows at bottom area when a phone device is used*/}
                     <div className="w-full h-full py-5 md:hidden">

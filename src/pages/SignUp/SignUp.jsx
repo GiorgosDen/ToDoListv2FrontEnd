@@ -141,7 +141,7 @@ function SignUp(){
         </div>
         {/*Terms & Policy PopUp */}
         <div className={`${viewTermsPolicy?'':'hidden'} fixed inset-0 flex items-center justify-center bg-black/50 z-50`}>
-            <div className={`overflow-y-auto min-h-0 w-4/5 h-4/5 flex items-center bg-white rounded-lg shadow-lg gap-2 px-4 pb-4`}>
+            <div className={`overflow-y-auto customScrollStyle min-h-0 w-4/5 h-4/5 flex items-center bg-white rounded-lg shadow-lg gap-2 px-4 pb-4`}>
                 {
                     TermsPolicyMap[mapTermsPolicy]
                 }

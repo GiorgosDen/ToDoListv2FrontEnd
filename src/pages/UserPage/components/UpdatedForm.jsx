@@ -128,16 +128,16 @@ function UpdatedForm({userName,userEmail,setUserName,informAvatar}){
             </section>
             <section className="w-[90%]">
                 <label className="text-md">Full Name <span className={`text-sm text-red-700 ${fullNameError}`}>*Unvalid full name</span></label>
-                <input type="text" id="first_name" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-md placeholder:text-body" 
+                <input type="text" id="first_name" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 block w-full px-3 py-2.5 shadow-md placeholder:text-body" 
                     placeholder="Import new username" required value={userNewFullName} onChange={(fn)=>setUserNewFullName(fn.target.value)}/>
                 <label className="text-md">Email Address <span className={`text-sm text-red-700 ${emailError}`}>*Unvalid email</span></label>
-                <input type="text" id="first_name" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-md placeholder:text-body" 
+                <input type="text" id="first_name" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 block w-full px-3 py-2.5 shadow-md placeholder:text-body" 
                     placeholder="Import new email" required value={userNewEmail} onChange={(em)=>setUserNewEmail(em.target.value)}/>
                 <label className="text-md"> Current Password <span className={`text-sm text-red-700 ${currentPasswordError}`}>*Unvalid password</span></label>
-                <input type="password" id="first_name" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-md placeholder:text-body" 
+                <input type="password" id="first_name" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 block w-full px-3 py-2.5 shadow-md placeholder:text-body" 
                     placeholder="Import Current password" required value={userCurrentPassword} onChange={(pass)=>setUserCurrentPassword(pass.target.value)}/>
                 <label className="text-md">New Password <span className={`text-sm text-red-700 ${newPasswordError}`}>*Wrong current password</span></label>
-                <input type="password" id="first_name" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-md placeholder:text-body" 
+                <input type="password" id="first_name" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 block w-full px-3 py-2.5 shadow-md placeholder:text-body" 
                     placeholder="Import new password" required value={userNewPassword} onChange={(pass)=>setUserNewPassword(pass.target.value)}/>      
             </section>
             <section className="w-[90%] flex">

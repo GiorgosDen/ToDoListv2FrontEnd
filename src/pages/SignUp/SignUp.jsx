@@ -118,17 +118,17 @@ function SignUp(){
         {/*Sign Up form */}
         <div id="signFormArea" className="flex flex-col justify-start gap-1">
             <label className="text-sm md:text-md">Full Name <span className={`text-sm text-red-700 ${nameError}`}>* Unvalid Full Name</span></label>
-            <input type="text" id="inputName" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-md placeholder:text-body" 
+            <input type="text" id="inputName" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 block w-full px-3 py-2.5 shadow-md placeholder:text-body" 
             placeholder="Enter your full name" required value={userName} onChange={(name)=>setUserName(name.target.value)}/>
             <label className="text-sm md:text-md">Email Address <span className={`text-sm text-red-700 ${emailError}`}>* Unvalid Email</span></label>
-            <input type="text" id="inputEmail" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-md placeholder:text-body" 
+            <input type="text" id="inputEmail" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 block w-full px-3 py-2.5 shadow-md placeholder:text-body" 
             placeholder="user.example@gmail.com" required value={userEmail} onChange={(em)=>setUserEmail(em.target.value)}/>
             <label className="text-sm md:text-md">Password <span className={`text-sm text-red-700 ${passwordError}`}>* Unvalid Password</span></label>
-            <input type="password" id="inputPass" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-md placeholder:text-body" 
+            <input type="password" id="inputPass" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 block w-full px-3 py-2.5 shadow-md placeholder:text-body" 
             placeholder="Create your password" required value={userPassword} onChange={(pass)=>setUserPassword(pass.target.value)}/>
             <p id="helperPassword" className="text-gray-600 text-xs">Must be at least 8 characters</p>
             <label className="text-sm md:text-md">Confirm Password <span className={`text-sm text-red-700 ${verPasswordError}`}>* The password must be the same</span></label>
-            <input type="password" id="verifyPass" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-md placeholder:text-body" 
+            <input type="password" id="verifyPass" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 block w-full px-3 py-2.5 shadow-md placeholder:text-body" 
             placeholder="Confirm your password" required value={userVerPassword} onChange={(verPass)=>setUserVerPassword(verPass.target.value)}/>
             {/*Agree Terms & Policy checkbox  */}
             <div id="agreedPanel"> 

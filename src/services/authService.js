@@ -53,14 +53,15 @@ const authService = {
             return {success:false,data:error};
         }
     },
-    async resetPasswordByEmail(passowrdObject,token){
+    async resetPasswordByEmail(passwordObject,token){
         try {
              //signUpData a JSON {fullName,email,password}
-            const response = await apiClient.post(`/auth/reset-password/${token}`,passowrdObject);
+            const response = await apiClient.post(`/auth/reset-password/${token}`,passwordObject);
             console.log("Console",response.data);
             return {success:true,data:response.data};
         } catch (error) {
-            
+            console.log(error);
+            return {success:false,data:error};
         }
     }
 } 

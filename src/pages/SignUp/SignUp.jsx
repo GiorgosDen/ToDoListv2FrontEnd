@@ -114,6 +114,7 @@ function SignUp(){
             const emailObject= {
                 email:resendEmail
             }
+            console.log(emailObject);
             const result = await authService.resendVerificationService(emailObject);
             if(result.success){
                 setViewResendVerificationPopUp(false);

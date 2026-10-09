@@ -177,17 +177,15 @@ function SignUp(){
         </div>
         {/*Import Email for resend Verification PopUp */}
         <div className={`${viewResendVerificationPopUp?'':'hidden'} fixed inset-0 flex items-center justify-center bg-black/50 z-50`}>
-            <div className={`overflow-y-auto customScrollStyle min-h-0 w-4/5 h-4/5 flex items-center bg-white rounded-lg shadow-lg gap-2 px-4 pb-4`}>
                 <div className="flex flex-col items-center w-[90%] md:w-[50%] bg-white rounded-lg shadow-lg p-6 gap-2">
                     <label className="font-semibold text-md md:text-lg">Email Address <span className={`text-sm text-red-700 ${resendEmailError}`}>* Unvalid Email</span></label>
                     <input type="text" id="inputResendEmail" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 block w-full px-3 py-2.5 shadow-md placeholder:text-body" 
                         placeholder="user.example@gmail.com" value={resendEmail} onChange={(em)=>setUserEmail(em.target.value)}/>
-                    <button className="mt-2 py-2 bg-blue-700 text-white rounded-lg shadow-md hover:bg-blue-800"
+                    <button className="w-full mt-2 py-2 bg-blue-700 text-white rounded-lg shadow-md hover:bg-blue-800"
                         onClick={handleResendVerification}>Resend Verification</button>
-                    <button className="mt-2 py-2 bg-transparent hover:bg-gray-400 hover:bg-opacity-30 shadow-md text-gray-700 border-gray-500 hover:border-gray-700 rounded-lg"
+                    <button className="w-full mt-2 py-2 bg-transparent hover:bg-gray-400 hover:bg-opacity-30 shadow-md text-gray-700 border border-gray-500 hover:border-gray-700 rounded-lg"
                         onClick={()=>setViewResendVerificationPopUp(false)}>Cancel</button>
                 </div>
-            </div>
         </div>
         </>
     );

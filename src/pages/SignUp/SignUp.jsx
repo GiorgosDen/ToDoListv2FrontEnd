@@ -15,16 +15,20 @@ function SignUp(){
     const [passwordError,setPasswordError] = useState('hidden');
     const [verPasswordError,setVerPasswordError] = useState('hidden');
     const [agreeTermsError,setAgreeTermsError] = useState('hidden');
+    const [resendEmailError,setResendEmailError] = useState('hidden');
     //entry data states
     const [userName, setUserName] = useState('');
     const [userEmail, setUserEmail] = useState('');
     const [userPassword, setUserPassword]= useState('');
     const [userVerPassword, setUserVerPassword]= useState('');
     const [agreeTerms, setAgreeTerms] = useState(false);
+    const [resendEmail, setResendEmail] = useState('');
     //Policy & Terms view state (boolean)
     const [viewTermsPolicy, setViewTermsPolicy] = useState(false);
     //Policy & Terms map state (string)
     const [mapTermsPolicy, setMapTermsPolicy] = useState("terms");
+    //View resend verification popup (boolean)
+    const [viewResendVerificationPopUp, setViewResendVerificationPopUp] = useState(false);
     //Component (Terms or Policy) map
     const TermsPolicyMap = {
         "policy":<PrivacyPolicy hidePage={()=>{hideTermsPolicy();}}/>,
@@ -103,6 +107,24 @@ function SignUp(){
 
     };
 
+    const handleResendVerification= async()=>{
+        setResendEmailError('hidden');
+        if(userEmail.length>0 && userEmail.endsWith("@gmail.com")){
+            //valid email
+            const emailObject= {
+                email:resendEmail
+            }
+            const result = await authService.resendVerificationService(emailObject);
+            if(result.success){
+                setViewResendVerificationPopUp(false);
+                navigate("/?status=signup-email");
+            }
+        }else{
+            //Unvalid email
+            setResendEmailError('');
+        }
+    }
+
     return(
         <>
         {/*User links to Log In page, if has a account */}
@@ -136,6 +158,12 @@ function SignUp(){
                 <label className="text-gray-600 text-sm">I agree to the <span onClick={()=>{setViewTermsPolicy(true); setMapTermsPolicy("terms");}} className="text-blue-400 hover:underline hover:text-blue-700">Terms of Service</span> & <span onClick={()=>{setViewTermsPolicy(true); setMapTermsPolicy("policy");}} className="text-blue-400 hover:underline hover:text-blue-700">Privacy Policy</span></label>
                 <span className={`text-sm text-red-700 ${agreeTermsError}`}> *Must be agreed with Terms and Policy</span>
             </div>
+            {/*Resend Verification Email*/}
+            <div id="resendVeriFicationPanel"> 
+                <label className="text-sm font-semibold text-blue-500 hover:text-blue-800"
+                 onClick={()=>setViewResendVerificationPopUp(true)}>Already registered but didn't verify? [Resend verification email]
+                 </label>
+            </div>
             <button className="mt-2 py-2 bg-blue-700 text-white rounded-lg shadow-md hover:bg-blue-800"
              onClick={handleSignUp}>Create Account</button>
         </div>
@@ -145,6 +173,20 @@ function SignUp(){
                 {
                     TermsPolicyMap[mapTermsPolicy]
                 }
+            </div>
+        </div>
+        {/*Import Email for resend Verification PopUp */}
+        <div className={`${viewResendVerificationPopUp?'':'hidden'} fixed inset-0 flex items-center justify-center bg-black/50 z-50`}>
+            <div className={`overflow-y-auto customScrollStyle min-h-0 w-4/5 h-4/5 flex items-center bg-white rounded-lg shadow-lg gap-2 px-4 pb-4`}>
+                <div className=" flex flex-col h-full w-full px-2 gap-5">
+                    <label className="text-sm md:text-md">Email Address <span className={`text-sm text-red-700 ${resendEmailError}`}>* Unvalid Email</span></label>
+                    <input type="text" id="inputResendEmail" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 block w-full px-3 py-2.5 shadow-md placeholder:text-body" 
+                        placeholder="user.example@gmail.com" value={resendEmail} onChange={(em)=>setUserEmail(em.target.value)}/>
+                    <button className="mt-2 py-2 bg-blue-700 text-white rounded-lg shadow-md hover:bg-blue-800"
+                        onClick={handleResendVerification}>Resend Verification</button>
+                    <button className="mt-2 py-2 bg-transparent hover:bg-gray-400 hover:bg-opacity-30 shadow-md text-gray-700 border-gray-500 hover:border-gray-700 rounded-lg"
+                        onClick={()=>setViewResendVerificationPopUp(false)}>Cancel</button>
+                </div>
             </div>
         </div>
         </>

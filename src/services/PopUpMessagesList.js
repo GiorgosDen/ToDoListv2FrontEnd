@@ -69,7 +69,7 @@ const PopUpMessagesList =[
         status:423,
         title:"Unverified Account",
         description:"You already have an unverified account with this email",
-        iconPath:"M12,2C6.5,2 2,6.5 2,12C2,17.5 6.5,22 12,22C17.5,22 22,17.5 22,12C22,6.5 17.5,2 12,2M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12.5,7H11V13L16.25,16.15L17,14.92L12.5,12.22V7Z",
+        iconPath:"M22 17a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9.5C2 7 4 5 6.5 5h11C20 5 22 7 22 9.5ZM22 7l-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7M12 11v4M12 18h.01",
         iconColor:"text-yellow-500",
         buttonMessage:"Close"
     },

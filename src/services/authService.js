@@ -22,6 +22,16 @@ const authService = {
             return {success:false,data:error};
         }
     },
+    async resendVerificationService(emailObject){
+        try {
+            //signUpData a JSON {fullName,email,password}
+            const response = await apiClient.post('/auth/reverify',emailObject);
+            return {success:true,data:response.data};   
+        } catch (error) {
+            console.log(error);
+            return {success:false,data:error};
+        }
+    },
     async logOutService(){
         try {
             const response = await apiClient.post('/auth/logout');

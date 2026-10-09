@@ -57,8 +57,8 @@ function App() {
       <Routes>
           <Route path="/" element={<LogSignLayout triggerPopUpMessage={triggerPopUpMessage}/>}>
             <Route index element={<LoginPage/>}/>
-            <Route path='/signUp' element={<SignUp/>}/>
-            <Route path='/reset/:token' element={<ResetPassword/>}/>
+            <Route path='signUp' element={<SignUp/>}/>
+            <Route path='reset/:token' element={<ResetPassword/>}/>
           </Route>
           <Route path="/home" element={<Layout triggerPopUpMessage={triggerPopUpMessage}/>}>
             <Route index element={<MainPage/>}/>

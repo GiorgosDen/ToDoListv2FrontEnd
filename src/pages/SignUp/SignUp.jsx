@@ -180,7 +180,7 @@ function SignUp(){
                 <div className="flex flex-col items-center w-[90%] md:w-[50%] bg-white rounded-lg shadow-lg p-6 gap-2">
                     <label className="font-semibold text-md md:text-lg">Email Address <span className={`text-sm text-red-700 ${resendEmailError}`}>* Unvalid Email</span></label>
                     <input type="text" id="inputResendEmail" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 block w-full px-3 py-2.5 shadow-md placeholder:text-body" 
-                        placeholder="user.example@gmail.com" value={resendEmail} onChange={(em)=>setUserEmail(em.target.value)}/>
+                        placeholder="user.example@gmail.com" value={resendEmail} onChange={(em)=>setResendEmail(em.target.value)}/>
                     <button className="w-full mt-2 py-2 bg-blue-700 text-white rounded-lg shadow-md hover:bg-blue-800"
                         onClick={handleResendVerification}>Resend Verification</button>
                     <button className="w-full mt-2 py-2 bg-transparent hover:bg-gray-400 hover:bg-opacity-30 shadow-md text-gray-700 border border-gray-500 hover:border-gray-700 rounded-lg"

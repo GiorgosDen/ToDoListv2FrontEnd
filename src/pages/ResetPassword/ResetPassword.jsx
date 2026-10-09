@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 import authService from "../../services/authService";
 
 function ResetPassword(){
     const {token} = useParams();
+    const navigate = useNavigate();
     //Form error states
     const [passwordError,setPasswordError] = useState('hidden');
     const [verPasswordError,setVerPasswordError] = useState('hidden');

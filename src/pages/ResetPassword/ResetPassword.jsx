@@ -24,6 +24,8 @@ function ResetPassword(){
             const result = await authService.resetPasswordByEmail(passwordObject,token);
             if(result.success){
                 navigate("/?status=signup-email");
+            }else{
+                navigate('/');
             }
         }else{
             userPassword.length<8?setPasswordError(''):setPasswordError('hidden');

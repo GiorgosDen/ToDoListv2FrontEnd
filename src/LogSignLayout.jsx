@@ -32,7 +32,7 @@ function LogSignLayout({triggerPopUpMessage}){
                     <Outlet context={{triggerPopUpMessage}}/>
                     {/*Image that shows at bottom area when a phone device is used*/}
                     <div className="w-full h-full py-5 md:hidden">
-                        <img src="./splitImg.svg" className="w-full h-auto object-contain"/>
+                        <img src="/splitImg.svg" className="w-full h-auto object-contain"/>
                     </div>
                 </div>
            </div>

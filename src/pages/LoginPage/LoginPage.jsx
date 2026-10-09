@@ -16,6 +16,10 @@ function LoginPage(){
     //entry data states
     const [userEmail, setUserEmail] = useState('');
     const [userPassword, setUserPassword]= useState('');
+    //Reset password popup states
+    const [emailSendError,setEmailSendError] = useState('hidden');
+    const [userSendEmail,setUserSendEmail] = useState('');
+    const [viewSendResetPasswordEmailPopUp,setViewSendResetPasswordEmailPopUp] = useState(false);
 
     useEffect(()=>{
         const findURLParams = ()=>{
@@ -87,6 +91,24 @@ function LoginPage(){
 
     };
 
+    const handleSendResetPasswordEmail=async()=>{
+        setEmailSendError('hidden')
+        if(userSendEmail.length>0 || !userSendEmail.endsWith("@gmail.com")){
+            //valid email
+            const emailObject= {
+                email:userSendEmail
+            }
+            console.log(emailObject);
+            const result = await authService.sendResetPasswordEmail(emailObject);
+            if(result.success){
+                setViewSendResetPasswordEmailPopUp(false);
+                navigate("/?status=signup-email");
+            }
+        }else{
+            //Unvalid email
+            setEmailSendError('');
+        }
+    }
     return(
         <>
         {/*User link to Sing Up page, if doesn't have an account */}
@@ -110,11 +132,26 @@ function LoginPage(){
             <label className="text-md">Password <span className={`text-sm text-red-700 ${passwordError}`}>*Unvalid password</span></label>
             <input type="password" id="first_name" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 block w-full px-3 py-2.5 shadow-md placeholder:text-body" 
             placeholder="Enter your Password" required value={userPassword} onChange={(pass)=>setUserPassword(pass.target.value)}/>
-
+            <div id="sendResetPasswordEmail"> 
+                <label className="text-sm font-semibold text-blue-500 hover:text-blue-800"
+                 onClick={()=>setViewSendResetPasswordEmailPopUp(true)}>Forgot your password? [Send reset password email]
+                 </label>
+            </div>
                 <button className="w-full mt-2 py-2 bg-blue-700 text-white rounded-lg shadow-md hover:bg-blue-800"
                 onClick={handleLogin}>
                     Log In
                 </button>
+        </div>
+        <div className={`${viewSendResetPasswordEmailPopUp?'':'hidden'} fixed inset-0 flex items-center justify-center bg-black/50 z-50`}>
+                <div className="flex flex-col items-center w-[90%] md:w-[50%] bg-white rounded-lg shadow-lg p-6 gap-2">
+                    <label className="font-semibold text-md md:text-lg">Email Address <span className={`text-sm text-red-700 ${emailSendError}`}>* Unvalid Email</span></label>
+                    <input type="text" id="inputResendEmail" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 block w-full px-3 py-2.5 shadow-md placeholder:text-body" 
+                        placeholder="user.example@gmail.com" value={userSendEmail} onChange={(em)=>setUserSendEmail(em.target.value)}/>
+                    <button className="w-full mt-2 py-2 bg-blue-700 text-white rounded-lg shadow-md hover:bg-blue-800"
+                        onClick={handleSendResetPasswordEmail}>Resend Verification</button>
+                    <button className="w-full mt-2 py-2 bg-transparent hover:bg-gray-400 hover:bg-opacity-30 shadow-md text-gray-700 border border-gray-500 hover:border-gray-700 rounded-lg"
+                        onClick={()=>setViewSendResetPasswordEmailPopUp(false)}>Cancel</button>
+                </div>
         </div>
         </>
     );

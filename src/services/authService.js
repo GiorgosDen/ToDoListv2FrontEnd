@@ -41,6 +41,27 @@ const authService = {
             console.log(error);
             return {success:false,data:error};
         }
+    },
+    async sendResetPasswordEmail(emailObject){
+        try {
+            //signUpData a JSON {fullName,email,password}
+            const response = await apiClient.post('/auth/reset-pass-mail',emailObject);
+            console.log("Console",response.data);
+            return {success:true,data:response.data};   
+        } catch (error) {
+            console.log(error);
+            return {success:false,data:error};
+        }
+    },
+    async resetPasswordByEmail(passowrdObject,token){
+        try {
+             //signUpData a JSON {fullName,email,password}
+            const response = await apiClient.post(`/auth/reset-password/${token}`,passowrdObject);
+            console.log("Console",response.data);
+            return {success:true,data:response.data};
+        } catch (error) {
+            
+        }
     }
 } 
 

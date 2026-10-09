@@ -19,6 +19,7 @@ import UserPage from './pages/UserPage/UserPage'
 import StatisticsPage from './pages/StatisticsPage/StatisticsPage'
 import TaskCategoryPage from './pages/TaskCategory/TaskCategoryPage'
 import PrioritiesPage from './pages/PrioritiesPage/PrioritiesPage'
+import ResetPassword from './pages/ResetPassword/ResetPassword'
 
 function App() {
   //ErrorMessagePopUp States
@@ -54,11 +55,10 @@ function App() {
   return(
     <BrowserRouter basename="/">
       <Routes>
-          <Route path='/terms' element={<TermsOfService/>}/>
-          <Route path='/policy' element={<PrivacyPolicy/>}/>
           <Route path="/" element={<LogSignLayout triggerPopUpMessage={triggerPopUpMessage}/>}>
             <Route index element={<LoginPage/>}/>
             <Route path='/signUp' element={<SignUp/>}/>
+            <Route path='/reset/:token' element={<ResetPassword/>}/>
           </Route>
           <Route path="/home" element={<Layout triggerPopUpMessage={triggerPopUpMessage}/>}>
             <Route index element={<MainPage/>}/>

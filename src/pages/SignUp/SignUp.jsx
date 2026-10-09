@@ -109,7 +109,7 @@ function SignUp(){
 
     const handleResendVerification= async()=>{
         setResendEmailError('hidden');
-        if(userEmail.length>0 && userEmail.endsWith("@gmail.com")){
+        if(userEmail.length===0 || !userEmail.endsWith("@gmail.com")){
             //valid email
             const emailObject= {
                 email:resendEmail

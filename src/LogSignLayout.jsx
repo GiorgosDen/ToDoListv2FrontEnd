@@ -23,7 +23,7 @@ function LogSignLayout({triggerPopUpMessage}){
                     </div>
                     <div className=" w-full h-full px-5">
                         <svg viewBox="90 20 100 75" className="w-full h-full">
-                            <image href="./splitImg.svg" width="220" height="95"/>
+                            <image href="/splitImg.svg" width="220" height="95"/>
                         </svg>
                     </div>
                 </div>

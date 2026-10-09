@@ -148,7 +148,7 @@ function LoginPage(){
                     <input type="text" id="inputResendEmail" className="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-lg focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 block w-full px-3 py-2.5 shadow-md placeholder:text-body" 
                         placeholder="user.example@gmail.com" value={userSendEmail} onChange={(em)=>setUserSendEmail(em.target.value)}/>
                     <button className="w-full mt-2 py-2 bg-blue-700 text-white rounded-lg shadow-md hover:bg-blue-800"
-                        onClick={handleSendResetPasswordEmail}>Resend Verification</button>
+                        onClick={handleSendResetPasswordEmail}>Send Email</button>
                     <button className="w-full mt-2 py-2 bg-transparent hover:bg-gray-400 hover:bg-opacity-30 shadow-md text-gray-700 border border-gray-500 hover:border-gray-700 rounded-lg"
                         onClick={()=>setViewSendResetPasswordEmailPopUp(false)}>Cancel</button>
                 </div>

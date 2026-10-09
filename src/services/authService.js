@@ -26,7 +26,7 @@ const authService = {
         try {
             //signUpData a JSON {fullName,email,password}
             const response = await apiClient.post('/auth/reverify',emailObject);
-            console.log(response.data);
+            console.log("Console",response.data);
             return {success:true,data:response.data};   
         } catch (error) {
             console.log(error);

@@ -60,7 +60,7 @@ function AddTaskForm({action,aTask,navigatePath,hidePopUpForm}){
     const [activeButtonId, setActiveButtonId] = useState(-1);//if user doesn't select a category
     
     useEffect(() => {
-        console.log("Loaded aTask:", aTask?.DateTime);
+        //console.log("Loaded aTask:", aTask?.DateTime);
         
         if (!FormActionCreate && aTask) {
             setTaskName(aTask.Name || '');
@@ -106,7 +106,7 @@ function AddTaskForm({action,aTask,navigatePath,hidePopUpForm}){
         //1.Task Name
         taskName.length>0?conditions+=1:setTaskNameError('');
         //2. Date Time (for today's tasks the time must be after the current time)
-        (taskDate!=todayDate) || (taskDate==todayDate && taskTime>todayTime)?conditions+=1:setTaskTimeError('');
+        (taskDate!=todayDate) || (taskDate==todayDate && taskTime>todayTime) && taskDate?conditions+=1:setTaskTimeError('');
         //3. Task Category
         activeButtonId!==-1?conditions+=1:setTaskCategoryError('');
 

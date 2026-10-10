@@ -23,7 +23,7 @@ function TaskPage(){
             }
         }
         getTaskByID();
-    },[taskId,updateTaskCounter]);
+    },[taskId]);
 
     return(
         <div className='p-4'>

@@ -38,7 +38,7 @@ function TaskManagePanel({aTask,taskState}){
     const deleteTask = async()=>{
         //If the task is not completed
         if(taskState!==3){
-            const deleteStat = await taskService.deleteTaskByID(aTask.ID);
+            const deleteStat = await taskService.deleteTaskByID(aTask.id);
             if(deleteStat==200){
                 navigate("/home");
             }
@@ -49,7 +49,7 @@ function TaskManagePanel({aTask,taskState}){
         }
     }
     const changePopUpVisibility = (aBoolean)=>{
-        setUpdateFormView(aBoolean)
+        setUpdateFormView(aBoolean);
     }
 
     return(

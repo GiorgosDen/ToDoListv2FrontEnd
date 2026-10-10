@@ -150,13 +150,17 @@ function AddTaskForm({action,aTask,navigatePath,hidePopUpForm}){
         }
     }
 
+    //Function to trigger close update popup form (when a user want to update a task)
+    const closeUpdatePopUp = ()=>{
+        hidePopUpForm(false);
+    }
 
     //Refresh to current page if Action="update"
     const handleFormExit = ()=>{
         if(FormActionCreate){
             navigate(navigatePath);
         }else{
-            hidePopUpForm(false);
+            closeUpdatePopUp();
         }
     }
 

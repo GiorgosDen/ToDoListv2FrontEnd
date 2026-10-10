@@ -53,7 +53,7 @@ function AddTaskForm({action,aTask,navigatePath,hidePopUpForm}){
     const [taskDescription, setTaskDescription] = useState('');
     const [taskCategory,setTaskCategory] = useState('');
     const [taskTime, setTaskTime] = useState(todayTime);
-    const [taskDate, setTaskDate] = useState(todayTime);
+    const [taskDate, setTaskDate] = useState(todayDate);
     const [taskReminder, setTaskReminder] = useState(0);
     const [taskPriority, setTaskPriority] = useState(1);
     //Change Category Button hook
@@ -106,7 +106,13 @@ function AddTaskForm({action,aTask,navigatePath,hidePopUpForm}){
         //1.Task Name
         taskName.length>0?conditions+=1:setTaskNameError('');
         //2. Date Time (for today's tasks the time must be after the current time)
-        (taskDate!=todayDate) || (taskDate==todayDate && taskTime>todayTime) && taskDate?conditions+=1:setTaskTimeError('');
+        if (taskDate && taskTime && ((taskDate !== todayDate) || (taskDate === todayDate && taskTime > todayTime))) {
+            conditions += 1;
+        } else {
+            if(!taskDate) setTaskDateError('');//Undefined Date
+            if(!taskTime) setTaskTimeError('');//Undefined Time
+            if(!(taskDate === todayDate && taskTime > todayTime)) setTaskTimeError('');//Todays date but expired time
+        }
         //3. Task Category
         activeButtonId!==-1?conditions+=1:setTaskCategoryError('');
 
@@ -145,6 +151,7 @@ function AddTaskForm({action,aTask,navigatePath,hidePopUpForm}){
                     if(resStatus===200) {
                          const matchedError = PopUpMessagesList.find(mess => mess.status === 'update-task');
                         triggerPopUpMessage(matchedError);
+                        hidePopUpForm(false);
                         window.location.reload();
                     }
                 }

@@ -40,6 +40,8 @@ function TaskManagePanel({aTask,taskState}){
         if(taskState!==3){
             const deleteStat = await taskService.deleteTaskByID(aTask.id);
             if(deleteStat==200){
+                const matchedMessage = PopUpMessagesList.find(err => err.status === "delete-task");
+                triggerPopUpMessage(matchedMessage);
                 navigate("/home");
             }
         }else{
@@ -47,9 +49,6 @@ function TaskManagePanel({aTask,taskState}){
             const matchedError = PopUpMessagesList.find(err => err.status === 'delete-completed');
             triggerPopUpMessage(matchedError);
         }
-    }
-    const changePopUpVisibility = (aBoolean)=>{
-        setUpdateFormView(aBoolean);
     }
 
     return(
@@ -68,7 +67,7 @@ function TaskManagePanel({aTask,taskState}){
              onClick={deleteTask}>Delete</button>
 
              <div id="updateFormPopUp" className={`${updateFormView?'':'hidden'} fixed inset-0 flex items-center justify-center bg-black/50 z-50`}>
-                 <AddTaskForm action={"update"} aTask={aTask} navigatePath={``} hidePopUpForm={changePopUpVisibility}/>
+                 <AddTaskForm action={"update"} aTask={aTask} navigatePath={``} hidePopUpForm={setUpdateFormView}/>
              </div>
         </div>
     );

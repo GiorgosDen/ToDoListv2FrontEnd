@@ -24,7 +24,7 @@ import PopUpMessagesList from "../../../services/PopUpMessagesList";
     2. aTask (user's Task): null / JSON object {id, Name, ...}
 */}
 
-function AddTaskForm({action,aTask,navigatePath,hidePopUpForm}){
+function AddTaskForm({action,aTask,navigatePath,hidePopUpForm,setTaskCounter}){
     const {triggerPopUpMessage} = useOutletContext();
     //set Form Action
     const FormActionCreate = action==="create"?true:false;
@@ -141,8 +141,12 @@ function AddTaskForm({action,aTask,navigatePath,hidePopUpForm}){
                         navigate("/home");
                     }
                 }else{
-                    const uResult = await taskService.updateTaskByID(aTask.id,newTask);
-                    if(uResult.message) window.location.reload();
+                    const resStatus = await taskService.updateTaskByID(aTask.id,newTask);
+                    if(resStatus===200) {
+                         const matchedError = PopUpMessagesList.find(mess => mess.status === 'update-task');
+                        triggerPopUpMessage(matchedError);
+                        window.location.reload();
+                    }
                 }
             }
         }else{
@@ -150,17 +154,13 @@ function AddTaskForm({action,aTask,navigatePath,hidePopUpForm}){
         }
     }
 
-    //Function to trigger close update popup form (when a user want to update a task)
-    const closeUpdatePopUp = ()=>{
-        hidePopUpForm(false);
-    }
 
     //Refresh to current page if Action="update"
     const handleFormExit = ()=>{
         if(FormActionCreate){
             navigate(navigatePath);
         }else{
-            closeUpdatePopUp();
+            hidePopUpForm(false);
         }
     }
 

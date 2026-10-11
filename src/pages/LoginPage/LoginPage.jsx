@@ -81,7 +81,9 @@ function LoginPage(){
                 //if server finds user (sends their name)
                 if(resData.success){
                     const firstName = resData.data.name.trim().split(" ")[0];
-                    //Navigate and pass the user name (the first name in case that user has firstand last name)
+                    //Save the first name into local storage
+                    localStorage.setItem("firstName",firstName);
+                    //Navigate to home page
                     navigate("/home", {state:{username:firstName}});
                 }     
             } catch (error) {

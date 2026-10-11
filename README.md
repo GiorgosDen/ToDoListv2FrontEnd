@@ -1,3 +1,5 @@
+> 💡 **Looking for the live deployment?** This `main` branch contains the original cookie-based architecture. For the version adapted for iOS/Safari compatibility (using `localStorage` and deployed live on Vercel), please check out the [`portfolio-deployment` branch](https://github.com//GiorgosDen/ToDoListv2FrontEnd/tree/portfolio-deployment).
+
 # 📝 TaskMaster (ToDoListApp Front)
 A flexible web app built with React and Tailwind CSS (component design part). This frontend serves as a core component of the Full-Stack [ToDoList v2 App](https://github.com/GiorgosDen/ToDOListv2).
 ---

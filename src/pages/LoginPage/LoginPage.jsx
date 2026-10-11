@@ -84,8 +84,9 @@ function LoginPage(){
                     localStorage.setItem("accessToken",resData.data.accessToken);
                     localStorage.setItem("name",resData.data.name);
                     const firstName = localStorage.getItem("name").split(" ")[0];
+                    localStorage.setItem("firstName",firstName);
                     //Navigate and pass the user name (the first name in case that user has firstand last name)
-                    navigate("/home", {state:{username:firstName}});
+                    navigate("/home");
                 }     
             } catch (error) {
                 console.log(error);

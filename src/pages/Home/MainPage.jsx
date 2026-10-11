@@ -24,8 +24,7 @@ function MainPage(){
   //Get viewMode from outlet context
   const {viewMode,handleChangeViewMode} = useOutletContext();
   //Get the username
-  const location = useLocation();
-  const name = location.state?.username;
+  const [userFirstName,setUserFirstName] = useState(localStorage.getItem("firstName"));
   /**Hooks UseStates**/
   //user tasks that extract from database 
   const [userTasks, setUserTasks] = useState([]);
@@ -53,8 +52,9 @@ function MainPage(){
       }
     }
   useEffect(()=>{
+    //Insert User first name
+    setUserFirstName(localStorage.getItem("firstName"));
     getTasksData();
-
     handleSortTasksChange(taskSorter);
     //Create hello message
     createHelloMessage();
@@ -132,7 +132,7 @@ function MainPage(){
 
   return (
     <>
-        <MainHeader helloMessage={greetingMessage} userName={name} sendTaskSorter={handleSortTasksChange} currentViewMode={viewMode}/>
+        <MainHeader helloMessage={greetingMessage} userName={userFirstName} sendTaskSorter={handleSortTasksChange} currentViewMode={viewMode}/>
         <hr/>
         <AddTaskMenu totalTasks={currentViewModeTasks} viewMode={viewMode}/>
         <div className="flex-1 min-h-0 overflow-y-auto customScrollStyle">

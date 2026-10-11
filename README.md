@@ -1,56 +1,13 @@
-# 📝 TaskMaster (ToDoListApp Front)
-A flexible web app built with React and Tailwind CSS (component design part). This frontend serves as a core component of the Full-Stack [ToDoList v2 App](https://github.com/GiorgosDen/ToDOListv2).
----
-| Part Name | Link | Tech Stack |
-| :--- | :--- | :--- |
-| **Front-End App** | `this repo` | React, TailwindCSS |
-| **Back-End API** | [View Repo](https://github.com/GiorgosDen/ToDOListv2BackEnd) | Node.js,Express,MySQL |
+# Portfolio-Redeploy Frontend App (v2)
+
+## Branch Purpose:
+This branch contains the project's frontend files adapted to bypass strict cross-site tracking and cookie policies on iOS devices and browsers like Safari (where cookies between two different domains are blocked). These updates integrate an Axios client with request/response interceptors to manage JWT storage via `localStorage` and transmit them securely via the `Authorization` header.
+
+- **Main Branch:** Contains the original project logic and cookie-based architecture.
+- **Portfolio-Deployment Branch:** Deployed live on Vercel, communicating with the Render backend using header-based authentication to ensure full compatibility across all mobile and desktop browsers.
+
+## Alternative approaches:
+Alternative approaches considered included purchasing a custom domain to unify the site under a single root domain or migrating to Firebase. However, this deployment branch successfully preserves the goal of a JavaScript-based full-stack project while maintaining a zero-cost publishing model.
 
 ---
-
-## Tech Stack
-* **Runtime:** React (Javascript)
-* **Build Tool:** Vite
-* **Design Library:** Tailwind CSS
-* **HTTP Request:** Axios (Javascript Library)
-
----
-
-## Security & Architecture
-* **Token-Based Auth:** JSON Web Tokens (JWT) are used for user authorization to protect and manage user data.
-* **Token duration:** Tokens expire after an hour.
-* **HttpOnly Cookie:** Safe storage and access to JWTs.
-* **Unique Identifiers:** User emails and IDs are strictly enforced as unique identifiers.
-
----
-
-## Features & Functionalities
-### User Management
-* **Sign Up:** A form page allowing new users to register in the system and sends a verification email.
-* **Verification:** An email arrives at the user's address after registration containing a verification link.
-* **Login:** A form page allowing users to log in using an email and password and receives an access JWT (Auth).
-* **Update:** A page that allows authorized users to update their profile information (in progress).
-* **Deregister:** An authorized user can remove their account from the system.
-
-### Task Management
-* **Daily Task Management:** The app provides real-time state management for creating, completing, and deleting tasks.
-* **Task Status Engine:** Automatic status calculation and appearance (Pending, Completed, Expired) based on due times.
-* **Task Categories:** Organize tasks using system and custom categories (the custom categories are in progress).
-* **Task Priorities:** Page to view detailed priority levels for tasks (in progress).
-
-### Notification & Warnings
-* **Privacy Policy & Terms of Service:** Indicative policy and terms researchable from sign-up page (written by Gemini).
-* **Form Warnings:** Warnings appear on a form for invalid inputs.
-* **Pop-Up Warnings:** A Pop-up shows up for server-side issues(Invalid login details, Sign Up email already used, Session expired, Cannot delete completed tasks, Server error) (in progress).
-
----
-
-## Roadmap
-1.  Finish Remaining Tasks
-2.  Flexible design for Desktop screens
-
----
-
 *Developed by Giorgos Den.*
-
-

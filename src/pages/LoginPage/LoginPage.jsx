@@ -78,9 +78,12 @@ function LoginPage(){
                 } 
                 //Get server response.data 
                 const resData = await authService.logInService(importedData);
-                //if server finds user (sends their name)
+                //if server finds user (sends name and accessToken)
                 if(resData.success){
-                    const firstName = resData.data.name.trim().split(" ")[0];
+                    //Save the token and the name
+                    localStorage.setItem("accessToken",resData.data.accessToken);
+                    localStorage.setItem("name",resData.data.name);
+                    const firstName = localStorage.setItem("name").split(" ")[0];
                     //Navigate and pass the user name (the first name in case that user has firstand last name)
                     navigate("/home", {state:{username:firstName}});
                 }     

@@ -28,6 +28,22 @@ export const setGlobalServerErrorHandler = (errorHandler)=>{
     globalServerErrorHandler = errorHandler;
 }
 
+//Handle Bearer token 
+apiClient.interceptors.request.use(
+    (config) => {
+        //Take the token from localStorage
+        const token = localStorage.getItem('accessToken');
+        // If the token exists, attach it to the Authorization header
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);
+
 //exact UTC time from the string without converting it to your local timezone
 apiClient.interceptors.response.use((response)=>{
     const resTasks = response.data.userTasks || response.data.userTask;

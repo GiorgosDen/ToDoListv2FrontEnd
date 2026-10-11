@@ -34,8 +34,7 @@ const authService = {
     },
     async logOutService(){
         try {
-            localStorage.removeItem('accessToken');
-            localStorage.removeItem('name');
+            localStorage.clear();
             const response = await apiClient.post('/auth/logout');
             return {success:true,data:response.data};
         } catch (error) {

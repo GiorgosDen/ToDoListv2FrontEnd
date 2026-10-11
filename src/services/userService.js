@@ -82,6 +82,11 @@ const userService ={
                     response = {fullnameRes,passwordRes,emailRes};
                     break;
             }
+            //If name changes (update local storage)
+            if(count===1 || count===3 || count===5 || count===7){
+                const newFirstName  = fullName.split(" ")[0];
+                localStorage.setItem("firstName",newFirstName);
+            }
             return response;
         } catch (error) {
             console.log(error);

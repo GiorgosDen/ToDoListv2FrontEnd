@@ -44,7 +44,10 @@ function App() {
     console.log(`Change PopUp visibility:false`);
     console.log(status);
     setPopUpVisible(false);
-    if(status===410) window.location.href = "/";;
+    if(status===410){
+      localStorage.clear();
+      window.location.href = "/";
+    }
   }
 
   useEffect(()=>{

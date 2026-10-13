@@ -42,6 +42,8 @@ function TaskCategoryPage(){
 
         taskCategoriesDB();
 
+        //Set to dummy category
+        setSelectedCategory(dummyTaskCategory);
         //Handle screen resize
         const handleResize = () => {
         if (window.innerWidth < 768) {

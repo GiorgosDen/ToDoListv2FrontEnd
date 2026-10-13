@@ -52,6 +52,11 @@ function MainPage(){
       }
     }
   useEffect(()=>{
+    const token = localStorage.getItem("accessToken");
+    if(!token) {
+      window.location.href = "/"; 
+      return null;
+    }
     //Insert User first name
     setUserFirstName(localStorage.getItem("firstName"));
     getTasksData();

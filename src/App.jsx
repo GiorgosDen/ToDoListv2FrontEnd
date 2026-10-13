@@ -45,8 +45,10 @@ function App() {
     console.log(status);
     setPopUpVisible(false);
     if(status===410){
-      localStorage.clear();
-      window.location.href = "/";
+      if (window.location.pathname !== "/") {
+        localStorage.clear();
+        window.location.href = "/";
+      }
     }
   }
 
